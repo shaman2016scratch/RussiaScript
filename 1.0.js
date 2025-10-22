@@ -63,6 +63,7 @@ function runRussiaScript(code) {
   codeRussiaScript = code.code
   RunKey = code.RunKey
   SessionRussiaScript(RunKey)
+  Peremens = {}
   i = 0
   i2 = 'true'
   while (i2) {
@@ -114,12 +115,16 @@ function runRussiaScript(code) {
           "getElement",
           "innerHTML",
           "TextContent",
-          "GetValue"
+          "GetValue",
+          "NewElement"
         ]
       }
     }
     if (i4 == 'Задать переменной значение') {
-      
+      peremens[i5.per] = i5.value
+    }
+    if (i4 == 'Импортировать расширение') {
+      console.error("RussiaScript Error: Import, Extensions (Libraries) not support!")
     }
   }
 }
