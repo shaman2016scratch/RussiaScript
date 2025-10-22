@@ -137,3 +137,43 @@ function RunRsCodeFromUrl(url) {
   })
   runRussiaScript(getCode)
 }
+function RussiaScriptGetValue(v) {
+  ii = v.type
+  ii2 = v.value
+  if (ii = 'текст') {
+    return (ii2)
+  }
+  if (ii = 'переменная') {
+    return peremens[ii2]
+  }
+  if (ii = 'get') {
+    return fetch(ii2, {  
+      method: 'GET',  
+      headers: { 
+        "Content-Type": "application/json",  
+      }
+    })
+  }
+  if (ii = 'post') {
+    return fetch(ii2, {  
+      method: 'POST',  
+      headers: { 
+        "Content-Type": "application/json",  
+      }
+    })
+  }
+  if (ii = 'delete') {
+    return fetch(ii2, {  
+      method: 'DELETE',  
+      headers: { 
+        "Content-Type": "application/json",  
+      }
+    })
+  }
+  if (ii2 == 'Пустой массив') {
+    return []
+  }
+  if (ii2 == 'Пустой объект') {
+    return {}
+  }
+}
