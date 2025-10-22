@@ -108,5 +108,8 @@ function runRussiaScript(code) {
         ]
       }
     }
+    if (i4 == 'dom') {
+      // Пока пусто
+    }
   }
 }
