@@ -109,7 +109,26 @@ function runRussiaScript(code) {
       }
     }
     if (i4 == 'dom') {
-      // Пока пусто
+      RsDomData = {
+        "Operations": [
+          "getElement",
+          "innerHTML",
+          "TextContent",
+          "GetValue"
+        ]
+      }
+    }
+    if (i4 == 'Задать переменной значение') {
+      
     }
   }
+}
+function RunRsCodeFromUrl(url) {
+  getCode = fetch(url, {  
+    method: 'GET',  
+    headers: { 
+      "Content-Type": "application/json",  
+    }
+  })
+  runRussiaScript(getCode)
 }
