@@ -327,8 +327,14 @@ function RussiaScriptGetValue(v) {
     if (ii3 == 'в json строку') {
       return JSON.stringify(ii4)
     }
+    if (ii3 == 'zв json строку') {
+      return JSON.stringify(RussiaScriptGetValue(ii4))
+    }
     if (ii3 == 'в JavaScript-объект') {
       return JSON.parse(ii4)
+    }
+    if (ii3 == 'зв JavaScript-объект') {
+      return JSON.parse(RussiaScriptGetValue(ii4))
     }
     if (ii3 == 'Задать ключ в объекте') {
       ii5 = ii4.json
@@ -337,9 +343,22 @@ function RussiaScriptGetValue(v) {
       ii5[ii6] = ii7
       return ii5[ii6]
     }
+    if (ii3 == 'зЗадать ключ в объекте') {
+      ii5 = RussiaScriptGetValue(ii4.json)
+      ii6 = RussiaScriptGetValue(ii4.key)
+      ii7 = RussiaScriptGetValue(ii4.value)
+      ii5[ii6] = ii7
+      return ii5[ii6]
+    }
     if (ii3 == 'Добавить элемент в начало массива') {
       ii5 = ii4.array
       ii6 = ii4.text
+      ii5.unshift(ii6)
+      return ii5
+    }
+    if (ii3 == 'зДобавить элемент в начало массива') {
+      ii5 = RussiaScriptGetValue(ii4.array)
+      ii6 = RussiaScriptGetValue(ii4.text)
       ii5.unshift(ii6)
       return ii5
     }
