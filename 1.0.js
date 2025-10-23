@@ -295,30 +295,45 @@ function RussiaScriptGetValue(v) {
       return (ii5 * ii6)
     }
   }
-  if (ii == обьеденить2) {
+  if (ii == 'обьеденить2') {
     ii3 = RussiaScriptGetValue(ii2[1])
     ii4 = RussiaScriptGetValue(ii2[2])
     return (`${ii3}${ii4}`)
   }
-  if (ii == обьеденить3) {
+  if (ii == 'обьеденить3') {
     ii3 = RussiaScriptGetValue(ii2[1])
     ii4 = RussiaScriptGetValue(ii2[2])
     ii5 = RussiaScriptGetValue(ii2[3])
     return (`${ii3}${ii4}${ii5}`)
   }
-  if (ii == обьеденить4) {
+  if (ii == 'обьеденить4') {
     ii3 = RussiaScriptGetValue(ii2[1])
     ii4 = RussiaScriptGetValue(ii2[2])
     ii5 = RussiaScriptGetValue(ii2[3])
     ii6 = RussiaScriptGetValue(ii2[4])
     return (`${ii3}${ii4}${ii5}${ii6}`)
   }
-  if (ii == обьеденить5) {
+  if (ii == 'обьеденить5') {
     ii3 = RussiaScriptGetValue(ii2[1])
     ii4 = RussiaScriptGetValue(ii2[2])
     ii5 = RussiaScriptGetValue(ii2[3])
     ii6 = RussiaScriptGetValue(ii2[4])
     ii7 = RussiaScriptGetValue(ii2[5])
     return (`${ii3}${ii4}${ii5}${ii6}${ii7}`)
+  }
+  if (ii == 'json') {
+    ii3 = ii2['действие']
+    ii4 = ii2['значение']
+    if (ii3 == 'в json строку') {
+      return JSON.stringify(ii4)
+    }
+    if (ii3 == 'в JavaScript-объект') {
+      return JSON.parse(ii4)
+    }
+    if (ii3 == 'Задать ключ в объекте') {
+      ii5 = ii4.json
+      ii6 = ii4.key
+      return ii5[ii6]
+    }
   }
 }
