@@ -85,9 +85,10 @@ function runRussiaScript(code) {
         "Delete",
         "Get"
       ]
+      fetch(i5.url, i5.params)
     }
     if (i4 == 'Вывести') {
-      RussiaScriptOutput.push(i5["Текст вывода"])
+      RussiaScriptOutput.push(RussiaScriptGetValue(i5["Текст вывода"]))
     }
     if (i4 == 'json') {
       RSjsonData = {
@@ -311,5 +312,13 @@ function RussiaScriptGetValue(v) {
     ii5 = RussiaScriptGetValue(ii2[3])
     ii6 = RussiaScriptGetValue(ii2[4])
     return (`${ii3}${ii4}${ii5}${ii6}`)
+  }
+  if (ii == обьеденить5) {
+    ii3 = RussiaScriptGetValue(ii2[1])
+    ii4 = RussiaScriptGetValue(ii2[2])
+    ii5 = RussiaScriptGetValue(ii2[3])
+    ii6 = RussiaScriptGetValue(ii2[4])
+    ii7 = RussiaScriptGetValue(ii2[5])
+    return (`${ii3}${ii4}${ii5}${ii6}${ii7}`)
   }
 }
