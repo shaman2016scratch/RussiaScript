@@ -368,10 +368,23 @@ function RussiaScriptGetValue(v) {
       ii5.push(ii6)
       return ii5
     }
-    if (ii3 == 'Добавить элемент в массив') {
+    if (ii3 == 'зДобавить элемент в массив') {
+      ii5 = RussiaScriptGetValue(ii4.array)
+      ii6 = RussiaScriptGetValue(ii4.text)
+      ii5.push(ii6)
+      return ii5
+    }
+    if (ii3 == 'Добавить элемент в массив в место') {
       ii5 = ii4.array
       ii6 = ii4.text
       ii7 = ii4.n
+      ii5.splice(ii7, 1, ii6)
+      return ii5
+    }
+    if (ii3 == 'зДобавить элемент в массив в место') {
+      ii5 = RussiaScriptGetValue(ii4.array)
+      ii6 = RussiaScriptGetValue(ii4.text)
+      ii7 = RussiaScriptGetValue(ii4.n)
       ii5.splice(ii7, 1, ii6)
       return ii5
     }
@@ -381,8 +394,19 @@ function RussiaScriptGetValue(v) {
       delete ii5[ii6] 
       return ii5
     }
+    if (ii3 == 'зУдалить из объекта') {
+      ii5 = RussiaScriptGetValue(ii4.json)
+      ii6 = RussiaScriptGetValue(ii4.n)
+      delete ii5[ii6] 
+      return ii5
+    }
     if (ii3 == 'Удалить последний элемент массива') {
       ii5 = ii4.array
+      ii5.pop()
+      return ii5
+    }
+    if (ii3 == 'зУдалить последний элемент массива') {
+      ii5 = RussiaScriptGetValue(ii4.array)
       ii5.pop()
       return ii5
     }
@@ -391,9 +415,20 @@ function RussiaScriptGetValue(v) {
       ii5.shift()
       return ii5
     }
+    if (ii3 == 'зУдалить первый элемент массива') {
+      ii5 = RussiaScriptGetValue(ii4.array)
+      ii5.shift()
+      return ii5
+    }
     if (ii3 == 'Удалить элемент массива') {
       ii5 = ii4.array
       ii6 = ii4.n
+      ii5.splice(ii6, 1)
+      return ii5
+    }
+    if (ii3 == 'зУдалить элемент массива') {
+      ii5 = RussiaScriptGetValue(ii4.array)
+      ii6 = RussiaScriptGetValue(ii4.n)
       ii5.splice(ii6, 1)
       return ii5
     }
@@ -405,6 +440,16 @@ function RussiaScriptGetValue(v) {
     if (ii3 == 'Элемент объекта') {
       ii5 = ii4.json
       ii6 = ii4.key
+      return ii5[ii6]
+    }
+    if (ii3 == 'зЭлемент массива') {
+      ii5 = RussiaScriptGetValue(ii4.array)
+      ii6 = RussiaScriptGetValue(ii4.n)
+      return ii5[ii6]
+    }
+    if (ii3 == 'зЭлемент объекта') {
+      ii5 = RussiaScriptGetValue(ii4.json)
+      ii6 = RussiaScriptGetValue(ii4.key)
       return ii5[ii6]
     }
   }
