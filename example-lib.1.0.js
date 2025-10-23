@@ -1,6 +1,8 @@
 class Lib
   info = {
     "created": "Example User",
+    "isDocs": "true",
+    "Docs": "example.com",
     "id": "ExampleId",
     "Name": "ExampleName",
     "version": "1.0",
@@ -15,7 +17,6 @@ class Lib
   Functions = [
     {
       "opcode": "block1",
-      "id": "example1",
       "name": "example block",
       "params": {},
       "block type": "command",
