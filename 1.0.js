@@ -194,5 +194,15 @@ function RussiaScriptGetValue(v) {
       ii6 = ii4['2']
       return (ii5 * ii6)
     }
+    if (ii3 == '÷') {
+      ii5 = ii4['1']
+      ii6 = ii4['2']
+      return (ii5 / ii6)
+    }
+    if (ii3 == '/') {
+      ii5 = ii4['1']
+      ii6 = ii4['2']
+      return (ii5 / ii6)
+    }
   }
 }
