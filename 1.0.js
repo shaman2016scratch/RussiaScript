@@ -353,7 +353,29 @@ function RussiaScriptGetValue(v) {
       ii5 = ii4.array
       ii6 = ii4.text
       ii7 = ii4.n
-      ii5.splice(ii7, 0, ii6)
+      ii5.splice(ii7, 1, ii6)
+      return ii5
+    }
+    if (ii3 == 'Удалить из объекта') {
+      ii5 = ii4.json
+      ii6 = ii4.n
+      delete ii5[ii6] 
+      return ii5
+    }
+    if (ii3 == 'Удалить последний элемент массива') {
+      ii5 = ii4.array
+      ii5.pop()
+      return ii5
+    }
+    if (ii3 == 'Удалить первый элемент массива') {
+      ii5 = ii4.array
+      ii5.shift()
+      return ii5
+    }
+    if (ii3 == 'Удалить элемент массива') {
+      ii5 = ii4.array
+      ii6 = ii4.n
+      ii5.splice(ii6, 1)
       return ii5
     }
   }
