@@ -333,7 +333,28 @@ function RussiaScriptGetValue(v) {
     if (ii3 == 'Задать ключ в объекте') {
       ii5 = ii4.json
       ii6 = ii4.key
+      ii7 = ii4.value
+      ii5[ii6] = ii7
       return ii5[ii6]
+    }
+    if (ii3 == 'Добавить элемент в начало массива') {
+      ii5 = ii4.array
+      ii6 = ii4.text
+      ii5.unshift(ii6)
+      return ii5
+    }
+    if (ii3 == 'Добавить элемент в массив') {
+      ii5 = ii4.array
+      ii6 = ii4.text
+      ii5.push(ii6)
+      return ii5
+    }
+    if (ii3 == 'Добавить элемент в массив') {
+      ii5 = ii4.array
+      ii6 = ii4.text
+      ii7 = ii4.n
+      ii5.splice(ii7, 0, ii6)
+      return ii5
     }
   }
 }
