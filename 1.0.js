@@ -294,6 +294,29 @@ function RussiaScriptGetValue(v) {
       ii6 = RussiaScriptGetValue(ii4[2])
       return (ii5 * ii6)
     }
+    if (ii3 == 'abs') {
+      return Math.abs(ii4)
+    }
+    if (ii3 == 'min') {
+      return Math.min(ii4)
+    }
+    if (ii3 == 'max') {
+      return Math.max(ii4)
+    }
+    if (ii3 == 'округлить') {
+      return Math.round(ii4)
+    }
+    if (ii3 == 'целое меньшее') {
+      return Math.floor(ii4)
+    }
+    if (ii3 == 'целое большее') {
+      return Math.ceil(ii4)
+    }
+    if (ii3 == 'рандом') {
+      ii5 = ii4[1]
+      ii6 = ii4[2]
+      return Math.random(ii5, ii6)
+    }
   }
   if (ii == 'обьеденить2') {
     ii3 = RussiaScriptGetValue(ii2[1])
@@ -452,5 +475,14 @@ function RussiaScriptGetValue(v) {
       ii6 = RussiaScriptGetValue(ii4.key)
       return ii5[ii6]
     }
+  }
+  if (ii == 'обьеденить6') {
+    ii3 = RussiaScriptGetValue(ii2[1])
+    ii4 = RussiaScriptGetValue(ii2[2])
+    ii5 = RussiaScriptGetValue(ii2[3])
+    ii6 = RussiaScriptGetValue(ii2[4])
+    ii7 = RussiaScriptGetValue(ii2[5])
+    ii8 = RussiaScriptGetValue(ii2[6])
+    return (`${ii3}${ii4}${ii5}${ii6}${ii7}${ii8}`)
   }
 }
