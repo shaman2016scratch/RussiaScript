@@ -1,9 +1,18 @@
 // RussiaScript code
 // код RussiaScript
 RussiaScriptOutput = '[]'
+RussiaScriptLibs = []
 function ExtensionRussiaScript(idLib, versionLib, CreatedLib, nameLib, infoLib, BlocksLib, FuncLib) {
-  infoLib = JSON.stringify(infoLib)
-  BlocksLib = JSON.stringify(BlocksLib)
+  LibData = {
+    "id": idLib,
+    "version": versionLib,
+    "Created by": CreatedLib,
+    "name": nameLib,
+    "info": infoLib,
+    "Blocks": BlocksLib,
+    "Function Blocks": FuncLib
+  }
+  RussiaScriptLibs.push(LibData)
 }
 function SessionRussiaScript(RK) {
   SessionRussiaScript = {
