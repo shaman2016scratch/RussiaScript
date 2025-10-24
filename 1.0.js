@@ -2,13 +2,13 @@
 // код RussiaScript
 RussiaScriptOutput = '[]'
 RussiaScriptLibs = []
-function ExtensionRussiaScript(idLib, versionLib, CreatedLib, nameLib, infoLib, BlocksLib, FuncLib) {
+function ExtensionRussiaScript(IdLib, VersionLib, CreatedLib, NameLib, InfoLib, BlocksLib, FuncLib) {
   LibData = {
-    "id": idLib,
-    "version": versionLib,
+    "id": IdLib,
+    "version": VersionLib,
     "Created by": CreatedLib,
-    "name": nameLib,
-    "info": infoLib,
+    "name": NameLib,
+    "info": InfoLib,
     "Blocks": BlocksLib,
     "Function Blocks": FuncLib
   }
