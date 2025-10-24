@@ -1,7 +1,8 @@
 // RussiaScript code
 // код RussiaScript
-RussiaScriptOutput = '[]'
+RussiaScriptOutput = []
 RussiaScriptLibs = []
+RussiaScriptLibs2 = {}
 function ExtensionRussiaScript(IdLib, VersionLib, CreatedLib, NameLib, InfoLib, BlocksLib, FuncLib) {
   LibData = {
     "id": IdLib,
@@ -13,6 +14,22 @@ function ExtensionRussiaScript(IdLib, VersionLib, CreatedLib, NameLib, InfoLib, 
     "Function Blocks": FuncLib
   }
   RussiaScriptLibs.push(LibData)
+}
+function RussiaScriptTerminal(command, params) {
+  if (command == 'pip Extension') {
+    RussiaScriptLibs2[params.id] = {
+      "id": params.id,
+      "name": params.name,
+      "version": params.version,
+      "code": params.url
+    }
+    getCode = fetch(params.url, {  
+      method: 'GET',  
+      headers: { 
+        "Content-Type": "application/json",  
+      }
+    })
+  }
 }
 function RussiaScriptGetValue(v) {
   ii = v.type
