@@ -24,6 +24,6 @@ class Lib
   ]
   block(opcode, args) {
     if (opcode == 'block1') {
-      ...
+      cosnole.log('example log!')
     }
   }
