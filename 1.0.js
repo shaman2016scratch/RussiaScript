@@ -317,6 +317,20 @@ function RussiaScriptGetValue(v) {
       ii6 = ii4[2]
       return Math.random(ii5, ii6)
     }
+    if (ii3 == 'pow') {
+      ii5 = ii4[1]
+      ii6 = ii4[2]
+      return Math.pow(ii5, ii6)
+    }
+    if (ii3 == 'квадратный корень') {
+      return Math.sqrt(ii4)
+    }
+    if (ii3 == 'синус') {
+      return Math.sin(ii4)
+    }
+    if (ii3 == 'косинус') {
+      return Math.cos(ii4)
+    }
   }
   if (ii == 'обьеденить2') {
     ii3 = RussiaScriptGetValue(ii2[1])
