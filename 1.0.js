@@ -1,7 +1,10 @@
 // RussiaScript code
 // код RussiaScript
 RussiaScriptOutput = '[]'
-Function ExtensionRussiaScript()
+Function ExtensionRussiaScript(idLib, versionLib, CreatedLib, nameLib, infoLib, BlocksLib, FuncLib) {
+  infoLib = JSON.stringify(infoLib)
+  BlocksLib = JSON.stringify(BlocksLib)
+}
 function SessionRussiaScript(RK) {
   SessionRussiaScript = {
     "ОС": "HarmonyOS",
