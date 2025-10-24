@@ -312,6 +312,24 @@ function RussiaScriptGetValue(v) {
     if (ii3 == 'целое большее') {
       return Math.ceil(ii4)
     }
+    if (ii3 == 'зabs') {
+      return Math.abs(RussiaScriptGetValue(ii4))
+    }
+    if (ii3 == 'зmin') {
+      return Math.min(RussiaScriptGetValue(ii4))
+    }
+    if (ii3 == 'зmax') {
+      return Math.max(RussiaScriptGetValue(ii4))
+    }
+    if (ii3 == 'зокруглить') {
+      return Math.round(RussiaScriptGetValue(ii4))
+    }
+    if (ii3 == 'зцелое меньшее') {
+      return Math.floor(RussiaScriptGetValue(ii4))
+    }
+    if (ii3 == 'зцелое большее') {
+      return Math.ceil(RussiaScriptGetValue(ii4))
+    }
     if (ii3 == 'рандом') {
       ii5 = ii4[1]
       ii6 = ii4[2]
@@ -328,8 +346,51 @@ function RussiaScriptGetValue(v) {
     if (ii3 == 'синус') {
       return Math.sin(ii4)
     }
+    if (ii3 == 'зрандом') {
+      ii5 = RussiaScriptGetValue(ii4[1])
+      ii6 = RussiaScriptGetValue(ii4[2])
+      return Math.random(ii5, ii6)
+    }
+    if (ii3 == 'зpow') {
+      ii5 = RussiaScriptGetValue(ii4[1])
+      ii6 = RussiaScriptGetValue(ii4[2])
+      return Math.pow(ii5, ii6)
+    }
+    if (ii3 == 'зквадратный корень') {
+      return Math.sqrt(RussiaScriptGetValue(ii4))
+    }
+    if (ii3 == 'зсинус') {
+      return Math.sin(RussiaScriptGetValue(ii4))
+    }
     if (ii3 == 'косинус') {
       return Math.cos(ii4)
+    }
+    if (ii3 == 'тангенс') {
+      return Math.tan(ii4)
+    }
+    if (ii3 == 'арксинус') {
+      return Math.asin(ii4)
+    }
+    if (ii3 == 'арккосинус') {
+      return Math.acos(ii4)
+    }
+    if (ii3 == 'арктангенс') {
+      return Math.atan(ii4)
+    }
+    if (ii3 == 'зкосинус') {
+      return Math.cos(RussiaScriptGetValue(ii4))
+    }
+    if (ii3 == 'зтангенс') {
+      return Math.tan(RussiaScriptGetValue(ii4))
+    }
+    if (ii3 == 'зарксинус') {
+      return Math.asin(RussiaScriptGetValue(ii4))
+    }
+    if (ii3 == 'зарккосинус') {
+      return Math.acos(RussiaScriptGetValue(ii4))
+    }
+    if (ii3 == 'зарктангенс') {
+      return Math.atan(RussiaScriptGetValue(ii4))
     }
   }
   if (ii == 'обьеденить2') {
@@ -498,5 +559,11 @@ function RussiaScriptGetValue(v) {
     ii7 = RussiaScriptGetValue(ii2[5])
     ii8 = RussiaScriptGetValue(ii2[6])
     return (`${ii3}${ii4}${ii5}${ii6}${ii7}${ii8}`)
+  }
+  if (ii == 'пи') {
+    return Math.PI
+  }
+  if (ii == 'число Эйлера') {
+    return Math.E
   }
 }
