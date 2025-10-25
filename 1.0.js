@@ -459,6 +459,27 @@ function RussiaScriptGetValue(v) {
   if (ii == 'число Эйлера') {
     return Math.E
   }
+  if (ii == 'обьеденить7') {
+    ii3 = RussiaScriptGetValue(ii2[1])
+    ii4 = RussiaScriptGetValue(ii2[2])
+    ii5 = RussiaScriptGetValue(ii2[3])
+    ii6 = RussiaScriptGetValue(ii2[4])
+    ii7 = RussiaScriptGetValue(ii2[5])
+    ii8 = RussiaScriptGetValue(ii2[6])
+    ii9 = RussiaScriptGetValue(ii2[7])
+    return (`${ii3}${ii4}${ii5}${ii6}${ii7}${ii8}${ii9}`)
+  }
+  if (ii == 'обьеденить8') {
+    ii3 = RussiaScriptGetValue(ii2[1])
+    ii4 = RussiaScriptGetValue(ii2[2])
+    ii5 = RussiaScriptGetValue(ii2[3])
+    ii6 = RussiaScriptGetValue(ii2[4])
+    ii7 = RussiaScriptGetValue(ii2[5])
+    ii8 = RussiaScriptGetValue(ii2[6])
+    ii9 = RussiaScriptGetValue(ii2[7])
+    ii10 = RussiaScriptGetValue(ii2[8])
+    return (`${ii3}${ii4}${ii5}${ii6}${ii7}${ii8}${ii9}${ii10}`)
+  }
 }
 function SessionRussiaScript(RK) {
   SessionRussiaScript = {
