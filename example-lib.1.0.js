@@ -17,13 +17,24 @@ Blocks = [
   {
     "opcode": "block1",
     "name": "example block",
-    "params": {},
-    "block type": "command",
+    "params": {}
+  }
+]
+Returners = [
+  {
+    "opcode": "return1",
+    "name": "example returner",
+    "params": {}
   }
 ]
 function block(opcode, args) {
   if (opcode == 'block1') {
     cosnole.log('example log!')
+  }
+}
+function returners(opcode, args) {
+  if (opcode == 'return1') {
+    return("example return!")
   }
 }
 ExtensionRussiaScript('ExampleId', '1.0', 'ExampleUser', 'Example Name', info, Blocks, 'block')
