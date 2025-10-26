@@ -607,12 +607,12 @@ function runRussiaScript(code) {
           "TextContent",
           "GetValue"
         ]
-        if (RussiaScriptGetValue(i5["метод"]) == "innerHTML") {
-          document.getElementById(RussiaScriptGetValue(i5["элемент"])).innerHTML = RussiaScriptGetValue(i5["значение"]);
-        }
-        if (RussiaScriptGetValue(i5["метод"]) == "TextContent") {
-          document.getElementById(RussiaScriptGetValue(i5["элемент"])).textContent = RussiaScriptGetValue(i5["значение"]);
-        }
+      }
+      if (RussiaScriptGetValue(i5["метод"]) == "innerHTML") {
+        document.getElementById(RussiaScriptGetValue(i5["элемент"])).innerHTML = RussiaScriptGetValue(i5["значение"]);
+      }
+      if (RussiaScriptGetValue(i5["метод"]) == "TextContent") {
+        document.getElementById(RussiaScriptGetValue(i5["элемент"])).textContent = RussiaScriptGetValue(i5["значение"]);
       }
     }
     if (i4 == 'Задать переменной значение') {
@@ -620,6 +620,17 @@ function runRussiaScript(code) {
     }
     if (i4 == 'Импортировать расширение') {
       console.error("RussiaScript Error: Import, Extensions (Libraries) not support!")
+    }
+    if (i4 == 'консоль') {
+      if (i5['метод'] == 'лог') {
+        console.log(RussiaScriptGetValue(i5['значение']))
+      }
+      if (i5['метод'] == 'предупреждение') {
+        console.warn(RussiaScriptGetValue(i5['значение']))
+      }
+      if (i5['метод'] == 'ошибка') {
+        console.error(RussiaScriptGetValue(i5['значение']))
+      }
     }
   }
 }
