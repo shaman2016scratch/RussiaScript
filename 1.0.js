@@ -6,7 +6,12 @@ RussiaScriptLibs2 = {}
 RussiaScriptReturnLibs = []
 Peremens = {}
 function ReturnNewLib(id, libext, extlib) {
-  RussiaScriptReturnLibs.push(`[id, libext, extlib]`)
+  ret = [
+    id
+    libext
+    extlib
+  ]
+  RussiaScriptReturnLibs.push(ret)
 }
 function ExtensionRussiaScript(IdLib, VersionLib, CreatedLib, NameLib, InfoLib, BlocksLib, ReturnLib, FuncLib, Func2Lib, Lib, Ext) {
   LibData = {
