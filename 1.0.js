@@ -3,6 +3,7 @@
 RussiaScriptOutput = []
 RussiaScriptLibs = []
 RussiaScriptLibs2 = {}
+Peremens = {}
 function ExtensionRussiaScript(IdLib, VersionLib, CreatedLib, NameLib, InfoLib, BlocksLib, FuncLib) {
   LibData = {
     "id": IdLib,
@@ -543,7 +544,6 @@ function runRussiaScript(code) {
   codeRussiaScript = code.code
   RunKey = code.RunKey
   SessionRussiaScript(RunKey)
-  Peremens = {}
   i = 0
   i2 = 'true'
   while (i2) {
