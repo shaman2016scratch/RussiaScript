@@ -45,5 +45,8 @@ ext = {
   "isExt": "true",
   "lib": "library RussiaScript 1.0, 2025"
 }
-ExtensionRussiaScript('ExampleId', '1.0', 'ExampleUser', 'Example Name', info, Blocks, 'block')
+function LibID() {
+  return null
+}
+ExtensionRussiaScript('ExampleId', '1.0', 'ExampleUser', 'Example Name', info, Blocks, 'block', 'returners', lib, ext)
 ReturnNewLib(info.id, lib.ext, ext.lib)
