@@ -37,4 +37,13 @@ function returners(opcode, args) {
     return("example return!")
   }
 }
+lib = {
+  "isLib": "true",
+  "ext": "extension RussiaScript 1.0, 2025"
+}
+ext = {
+  "isExt": "true",
+  "lib": "library RussiaScript 1.0, 2025"
+}
 ExtensionRussiaScript('ExampleId', '1.0', 'ExampleUser', 'Example Name', info, Blocks, 'block')
+ReturnNewLib(info.id, lib.ext, ext.lib)
