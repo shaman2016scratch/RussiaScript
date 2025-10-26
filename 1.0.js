@@ -1,9 +1,13 @@
-  // RussiaScript code
+// RussiaScript code
 // код RussiaScript
 RussiaScriptOutput = []
 RussiaScriptLibs = []
 RussiaScriptLibs2 = {}
+RussiaScriptReturnLibs = []
 Peremens = {}
+function ReturnNewLib(id, libext, extlib) {
+  RussiaScriptReturnLibs.push(`[id, libext, extlib]`)
+}
 function ExtensionRussiaScript(IdLib, VersionLib, CreatedLib, NameLib, InfoLib, BlocksLib, ReturnLib, FuncLib, Func2Lib, Lib, Ext) {
   LibData = {
     "id": IdLib,
