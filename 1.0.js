@@ -487,6 +487,9 @@ function RussiaScriptGetValue(v) {
   if (ii == 'GetValue') {
     return document.getElementById(RussiaScriptGetValue(ii2['значение'])).value
   }
+  if (ii == 'GetDocument') {
+    return document
+  }
 }
 function SessionRussiaScript(RK) {
   SessionRussiaScript = {
