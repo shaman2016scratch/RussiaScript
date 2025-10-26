@@ -481,6 +481,12 @@ function RussiaScriptGetValue(v) {
     ii10 = RussiaScriptGetValue(ii2[8])
     return (`${ii3}${ii4}${ii5}${ii6}${ii7}${ii8}${ii9}${ii10}`)
   }
+  if (ii == 'getElement') {
+    return document.getElementById(RussiaScriptGetValue(ii2['значение']))
+  }
+  if (ii == 'GetValue') {
+    return document.getElementById(RussiaScriptGetValue(ii2['значение'])).value
+  }
 }
 function SessionRussiaScript(RK) {
   SessionRussiaScript = {
@@ -555,7 +561,7 @@ function runRussiaScript(code) {
     i++
     i3 = codeRussiaScript.[i]
     i4 = i3.command
-    i5 = i4.params
+    i5 = i3.params
     if (i4 == 'Очистить Вывод') {
       RussiaScriptOutput = []
     }
@@ -596,13 +602,18 @@ function runRussiaScript(code) {
           "getElement",
           "innerHTML",
           "TextContent",
-          "GetValue",
-          "NewElement"
+          "GetValue"
         ]
+        if (RussiaScriptGetValue(i5["метод"]) == "innerHTML") {
+          document.getElementById(RussiaScriptGetValue(i5["элемент"])).innerHTML = RussiaScriptGetValue(i5["значение"]);
+        }
+        if (RussiaScriptGetValue(i5["метод"]) == "TextContent") {
+          document.getElementById(RussiaScriptGetValue(i5["элемент"])).textContent = RussiaScriptGetValue(i5["значение"]);
+        }
       }
     }
     if (i4 == 'Задать переменной значение') {
-      peremens[i5.per] = i5.value
+      peremens[RussiaScriptGetValue(i5.per)] = RussiaScriptGetValue(i5.value)
     }
     if (i4 == 'Импортировать расширение') {
       console.error("RussiaScript Error: Import, Extensions (Libraries) not support!")
