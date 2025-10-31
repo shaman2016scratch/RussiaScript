@@ -2,7 +2,7 @@
 // rml/rsml
 rsmlDocument = []
 RSML = {
-  "command": ""
+  "command": {}
 }
 function rsml(rsml, htmObject) {
   RSML.code = rsml
