@@ -30,7 +30,7 @@ function rsml(rsml, htmlObject) {
     }
     if (RSML.i4 == "код из источника") {
       if (RSML.i5.lang == 'JavaScript' || RSML.i5.lang == 'js' || RSML.i5.lang == "javascript") {
-        RSML.i7 = fetch(i6, {  
+        RSML.i7 = fetch(RSML.i6, {  
           method: 'GET',  
           headers: { 
             "Content-Type": "application/json",  
@@ -41,6 +41,15 @@ function rsml(rsml, htmlObject) {
     }
     if (RSML.i4 == 'html') {
       htmlRsmlDocument = `${htmlRsmlDocument}${RSML.i6}`
+    }
+    if (RSML.i4 == 'html из источника') {
+      RSML.i7 = fetch(RSML.i6, {  
+        method: 'GET',  
+        headers: { 
+          "Content-Type": "application/json",  
+        }
+      })
+      htmlRsmlDocument = `${htmlRsmlDocument}${RSML.i7}`
     }
   }
 }
