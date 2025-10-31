@@ -5,6 +5,7 @@ RussiaScriptLibs = []
 RussiaScriptLibs2 = {}
 RussiaScriptReturnLibs = []
 Peremens = {}
+filesRS = []
 function ReturnNewLib(id, libext, extlib) {
   ret = [
     id
@@ -46,7 +47,10 @@ function RussiaScriptTerminal(command, params) {
     return 'not support'
   }
   if (command == 'get os') {
-    return SessionRussiaScript.os
+    return SessionRussiaScript['ОС']
+  }
+  if (command == 'get session') {
+    return SessionRussiaScript
   }
 }
 function RussiaScriptGetValue(v) {
@@ -507,46 +511,42 @@ function RussiaScriptGetValue(v) {
   if (ii == 'GetDocument') {
     return document
   }
+  if (ii == 'Terminal') {
+    return RussiaScriptTerminal(RussiaScriptGetValue(ii2.com), RussiaScriptGetValue(ii2.par))
+  }
+  if (ii == 'и') {
+    return (RussiaScriptGetValue(ii2[1]) && RussiaScriptGetValue(ii2[2]))
+  }
+  if (ii == 'или') {
+    return (RussiaScriptGetValue(ii2[1]) || RussiaScriptGetValue(ii2[2]))
+  }
+  if (ii == '=') {
+    return (RussiaScriptGetValue(ii2[1]) == RussiaScriptGetValue(ii2[2]))
+  }
+  if (ii == 'не') {
+    return (RussiaScriptGetValue(ii2[1]) != (true))
+  }
+  if (ii == 'true') {
+    return (true)
+  }
+  if (ii == 'false') {
+    return (false)
+  }
 }
-function SessionRussiaScript(RK) {
+function SessionRussiaScript() {
   SessionRussiaScript = {
-    "ОС": "HarmonyOS",
-    "ИмяПрограммы": "RussiaScriptRinner",
-    "Язык": "Ru",
-    "Версия RussiaScript": "1.0",
+    "ОС": sys.os,
+    "Язык": sys.lang,
+    "Версия RussiaScript": "1.1",
     "User-agent": "Mozilla/5.0"
   }
-  SessionRS = JSON.stringify(SessionRussiaScript)
-  OperationSystems = [
-    "Unix",
-    "MacOS",
-    "BSD",
-    "Linux",
-    "Android",
-    "HarmonyOS",
-    "ios",
-    "ipadOS",
-    "tvOS"
-  ]
-  SessionRS.["ИмяПрограммы"] = RK.progname
-  SessionRS.["Язык"] = RK.lang
-  SessionRS.["Версия RussiaScript"] = "1.0"
   UserAgent = fetch('https://httpbin.org/user-agent', {  
         method: 'GET',  
         headers: { 
           "Content-Type": "application/json",  
         }
       })
-  SessionRS.["User-agent"] = UserAgent.["user-agent"]
-  OperationSystem = RK.os
-  OperationSystem = fetch(`https://shaman2016scratch.github.io/os?os="${OperationSystem}"`, {  
-        method: 'GET',  
-        headers: { 
-          "Content-Type": "application/json",  
-        }
-      })
-  SessionRS.["ОС"] = OperationSystem
-  SessionRussiaScript = JSON.parse(SessionRS)
+  SessionRussiaScript.["User-agent"] = UserAgent.["user-agent"]
 }
 function runRussiaScript(code) {
   DataTypes = [
@@ -568,8 +568,8 @@ function runRussiaScript(code) {
   ]
   LibsRussiaScript = code.libs
   codeRussiaScript = code.code
-  RunKey = code.RunKey
-  SessionRussiaScript(RunKey)
+  SessionRussiaScript()
+  termRussiaScript = code.terminal
   i = 0
   i2 = 'true'
   while (i2) {
@@ -647,6 +647,13 @@ function runRussiaScript(code) {
       }
       if (i5['метод'] == 'ошибка') {
         console.error(RussiaScriptGetValue(i5['значение']))
+      }
+    }
+    if (i4 == 'если') {
+      if (RussiaScriptGetValue(i5.bol)) {
+        RunRussiaScript(i5["то"])
+      } else {
+        RunRussiaScript(i5["иначе"])
       }
     }
   }
