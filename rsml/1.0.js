@@ -1,3 +1,4 @@
 // rsml (RSML) — RussiaScript Markup Language
 // rml/rsml
-function rsml() {}
+rsmlDocument = []
+function rsml(rsml, htmObject) {}
