@@ -2,9 +2,11 @@
 // rml/rsml
 rsmlDocument = []
 RSML = {
-  "command": {}
+  "command": {
+    "run": "function(rsml, htmlObject) { rsml(rsml, htmlObject) }"
+  }
 }
-function rsml(rsml, htmObject) {
+function rsml(rsml, htmlObject) {
   RSML.code = rsml
   rsmlDocument = rsml
   RSML.i = 0
