@@ -7,6 +7,7 @@ RSML = {
   }
 }
 function rsml(rsml, htmlObject) {
+  htmlRsmlDocument = ''
   RSML.code = rsml
   rsmlDocument = rsml
   RSML.i = 0
@@ -22,5 +23,24 @@ function rsml(rsml, htmlObject) {
     RSML.i4 = RSML.i3.tag
     RSML.i5 = RSML.i3.params
     RSML.i6 = RSML.i3.cod
+    if (RSML.i4 == "код") {
+      if (RSML.i5.lang == 'JavaScript' || RSML.i5.lang == 'js' || RSML.i5.lang == "javascript") {
+        eval(RSML.i6)
+      }
+    }
+    if (RSML.i4 == "код из источника") {
+      if (RSML.i5.lang == 'JavaScript' || RSML.i5.lang == 'js' || RSML.i5.lang == "javascript") {
+        RSML.i7 = fetch(i6, {  
+          method: 'GET',  
+          headers: { 
+            "Content-Type": "application/json",  
+          }
+        })
+        eval(RSML.i7)
+      }
+    }
+    if (RSML.i4 == 'html') {
+      htmlRsmlDocument = `${htmlRsmlDocument}${RSML.i6}`
+    }
   }
 }
