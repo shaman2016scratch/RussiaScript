@@ -10,9 +10,13 @@ Ext_exampleExt = {
   "commands": {
     "command": "function\(args\) \{ alert(args) \}"
   },
-  "commandList": ["command"],
+  "commandList": [
+    "command"
+  ],
   "reporters": {
     "reporter": "function\(args\) \{ return args.return \}"
   },
-  "reportersList": ["reporter"],
+  "reportersList": [
+    "reporter"
+  ],
 }
