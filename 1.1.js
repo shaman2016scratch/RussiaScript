@@ -611,7 +611,7 @@ function runRussiaScript(code) {
       i2 = (true)
     }
     i++
-    i3 = codeRussiaScript.[i]
+    i3 = codeRussiaScript[i]
     i4 = i3.command
     i5 = i3.params
     if (i4 == 'Очистить Вывод') {
@@ -670,7 +670,7 @@ function runRussiaScript(code) {
     if (i4 == 'Импортировать расширение') {
       console.error("RussiaScript Error: Import, Extensions (Libraries) not support!")
     }
-    if (i4 == 'консоль') {
+    if (i4 == 'js-консоль') {
       if (i5['метод'] == 'лог') {
         console.log(RussiaScriptGetValue(i5['значение']))
       }
