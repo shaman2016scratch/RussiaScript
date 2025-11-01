@@ -6,6 +6,9 @@ RussiaScriptLibs2 = {}
 RussiaScriptReturnLibs = []
 Peremens = {}
 filesRS = []
+RussiaScriptUser = {
+  "func": {}
+}
 function ReturnNewLib(id, libext, extlib) {
   ret = [
     id
@@ -523,6 +526,12 @@ function RussiaScriptGetValue(v) {
   if (ii == '=') {
     return (RussiaScriptGetValue(ii2[1]) == RussiaScriptGetValue(ii2[2]))
   }
+  if (ii == '<') {
+    return (RussiaScriptGetValue(ii2[1]) < RussiaScriptGetValue(ii2[2]))
+  }
+  if (ii == '>') {
+    return (RussiaScriptGetValue(ii2[1]) > RussiaScriptGetValue(ii2[2]))
+  }
   if (ii == 'не') {
     return (RussiaScriptGetValue(ii2[1]) != (true))
   }
@@ -531,6 +540,11 @@ function RussiaScriptGetValue(v) {
   }
   if (ii == 'false') {
     return (false)
+  }
+  if (ii == 'пользователь' || ii == 'user') {
+    if (ii2.type == 'функция') {
+      return RussiaScriptUser.func[ii2.func]
+    }
   }
 }
 function SessionRussiaScript() {
@@ -654,6 +668,14 @@ function runRussiaScript(code) {
         RunRussiaScript(i5["то"])
       } else {
         RunRussiaScript(i5["иначе"])
+      }
+    }
+    if (i4 == 'функция') {
+      RussiaScriptUser.func[i5.name] = `function(args) \{ ${i5.code} \}`
+    }
+    if (i4 == 'пользователь' || i4 == 'user') {
+      if (i5.type == 'функция') {
+        RussiaScriptUser.func[i5.func]
       }
     }
   }
