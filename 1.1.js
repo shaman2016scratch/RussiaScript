@@ -1,9 +1,6 @@
 // RussiaScript code
 // код RussiaScript
 RussiaScriptOutput = []
-RussiaScriptLibs = []
-RussiaScriptLibs2 = {}
-RussiaScriptReturnLibs = []
 Peremens = {}
 filesRS = []
 sys = {
@@ -13,47 +10,22 @@ sys = {
 RussiaScriptUser = {
   "func": {
     "return": "function\(args\) \{ return \(args\) \}",
-  }
-}
-function ReturnNewLib(id, libext, extlib) {
-  ret = [
-    id
-    libext
-    extlib
-  ]
-  RussiaScriptReturnLibs.push(ret)
-}
-function ExtensionRussiaScript(IdLib, VersionLib, CreatedLib, NameLib, InfoLib, BlocksLib, ReturnLib, FuncLib, Func2Lib, Lib, Ext) {
-  LibData = {
-    "id": IdLib,
-    "version": VersionLib,
-    "Created by": CreatedLib,
-    "name": NameLib,
-    "info": InfoLib,
-    "Blocks": BlocksLib,
-    "Returners": ReturnLib,
-    "Function Blocks": FuncLib,
-    "Function Returners": Func2Lib,
-    "lib": Lib,
-    "ext": Ext
-  }
-  RussiaScriptLibs.push(LibData)
+  },
+  "libs": {},
+  "libsInfo": {},
+  "LibsList": [],
 }
 function RussiaScriptTerminal(command, params) {
   if (command == 'pip Extension') {
-    RussiaScriptLibs2[params.id] = {
-      "id": params.id,
-      "name": params.name,
-      "version": params.version,
-      "code": params.url
-    }
-    getCode = fetch(params.url, {  
+    Ext = fetch(params.ext.url, {  
       method: 'GET',  
       headers: { 
         "Content-Type": "application/json",  
       }
     })
-    return 'not support'
+    RussiaScriptUser.LibsList.push(eval(`${Ext}; return ExtLibRS.id`))
+    RussiaScriptUser.libsInfo[params.ext.name] = eval(`${Ext}; return ExtLibRS`)
+    RussiaScriptUser.libs[RussiaScriptUser.libsInfo[params.ext.name].id] = eval(`${Ext}; return Ext_${RussiaScript.libsInfo[params.ext.name].id}`)
   }
   if (command == 'get os') {
     return SessionRussiaScript['ОС']
@@ -583,6 +555,15 @@ function RussiaScriptGetValue(v) {
       return RussiaScriptUser.func[ii2.func]
     }
   }
+  if (ii == 'lib' || ii == 'ext' || ii == 'либ') {
+    return RussiaScriptUser.libs[RussiaScriptUser.libsInfo[RussiaScriptGetValue(ii2.name)].id].reporters[RussiaScriptGetValue(ii2.func)]
+  }
+  if (ii == 'вывод' || ii == output) {
+    return RussiaScriptOutput
+  }
+  if (ii == 'prompt') {
+    return prompt(RussiaScriptGetValue(ii2))
+  }
 }
 function SessionRussiaScript() {
   SessionRussiaScript = {
@@ -702,21 +683,32 @@ function runRussiaScript(code) {
     }
     if (i4 == 'если') {
       if (RussiaScriptGetValue(i5.bol)) {
-        RunRussiaScript(i5["то"])
+        RunRussiaScript(RussiaScriptGetValue(i5["то"]))
       } else {
-        RunRussiaScript(i5["иначе"])
+        RunRussiaScript(RussiaScriptGetValue(i5["иначе"]))
       }
     }
     if (i4 == 'js-функция') {
-      RussiaScriptUser.func[i5.name] = `function(args) \{ ${i5.code} \}`
+      RussiaScriptUser.func[RussiaScriptGetValue(i5.name)] = `function(args) \{ ${RussiaScriptGetValue(i5.code)} \}`
     }
     if (i4 == 'rs-функция') {
-      RussiaScriptUser.func[i5.name] = `function(args) \{ RunRussiaScript${i5.code} \}`
+      RussiaScriptUser.func[RussiaScriptGetValue(i5.name)] = `function(args) \{ RunRussiaScript${RussiaScriptGetValue(i5.code)} \}`
     }
     if (i4 == 'пользователь' || i4 == 'user') {
       if (i5.type == 'функция') {
-        RussiaScriptUser.func[i5.func]
+        RussiaScriptUser.func[RussiaScriptGetValue(i5.func)]
       }
+    }
+    if (ii == 'lib' || ii == 'ext' || ii == 'либ') {
+      RussiaScriptUser.libs[RussiaScriptUser.libsInfo[RussiaScriptGetValue(ii2.name)].id].reporters[RussiaScriptGetValue(ii2.func)]
+    }
+    if (i4 == 'пока') {
+      while (RussiaScriptGetValue(i5.bol)) {
+        RunRussiaScript(RussiaScriptGetValue(i5.code))
+      }
+    }
+    if (i4 == 'alert') {
+      alert(RussiaScriptGetValue(i5))
     }
   }
 }
