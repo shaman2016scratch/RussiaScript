@@ -6,6 +6,10 @@ RussiaScriptLibs2 = {}
 RussiaScriptReturnLibs = []
 Peremens = {}
 filesRS = []
+sys = {
+  "lang": "ru",
+  "os": "kakaya-to operactionka"
+}
 RussiaScriptUser = {
   "func": {}
 }
@@ -54,6 +58,13 @@ function RussiaScriptTerminal(command, params) {
   }
   if (command == 'get session') {
     return SessionRussiaScript
+  }
+  if (command == 'get system') {
+    return sys
+  }
+  if (command == 'set system') {
+    sys = params
+    return {"ok":"true"}
   }
 }
 function RussiaScriptGetValue(v) {
