@@ -681,8 +681,11 @@ function runRussiaScript(code) {
         RunRussiaScript(i5["иначе"])
       }
     }
-    if (i4 == 'функция') {
+    if (i4 == 'js-функция') {
       RussiaScriptUser.func[i5.name] = `function(args) \{ ${i5.code} \}`
+    }
+    if (i4 == 'rs-функция') {
+      RussiaScriptUser.func[i5.name] = `function(args) \{ RunRussiaScript${i5.code} \}`
     }
     if (i4 == 'пользователь' || i4 == 'user') {
       if (i5.type == 'функция') {
