@@ -11,7 +11,9 @@ sys = {
   "os": "kakaya-to operactionka"
 }
 RussiaScriptUser = {
-  "func": {}
+  "func": {
+    "return": "function\(args\) \{ return \(args\) \}",
+  }
 }
 function ReturnNewLib(id, libext, extlib) {
   ret = [
@@ -65,6 +67,30 @@ function RussiaScriptTerminal(command, params) {
   if (command == 'set system') {
     sys = params
     return {"ok":"true"}
+  }
+  if (command == 'get files') {
+    return filesRS
+  }
+  if (command == 'new file') {
+    filesRS.push(params.name)
+    filesDataRS[params.name] = {
+      "type": params.type,
+      "args": [],
+      "args2": {}
+    }
+    return filesDataRS
+  }
+  if (command == 'new file in') {
+    filesRS[params.in].args.push(params.file.name)
+    filesDataRS[params.in].args2[params.file.name] = {
+      "type": params.file.type,
+      "args": [],
+      "args2": {},
+    }
+    return filesDataRS
+  }
+  if (command == 'get data files') {
+    return filesDataRS
   }
 }
 function RussiaScriptGetValue(v) {
