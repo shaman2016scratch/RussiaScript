@@ -15,7 +15,12 @@ RussiaScriptUser = {
   "libsInfo": {},
   "LibsList": [],
   "rs консоль": [],
+  "config": {},
+  "sysModules": {
+    "Chat Bot": {},
+  },
 }
+function RussiaScriptPomogFunc(args) {}
 function RsJsConsole(ty, te) {
   if (ty === 'log') {
     console.log(`RussiaScript: ${te}`)
@@ -583,6 +588,11 @@ function RussiaScriptGetValue(v) {
   if (ii == 'comfirm') {
     return comfirm(RussiaScriptGetValue(ii2))
   }
+  if (ii == 'чат-бот') {
+    if (RussiaScriptGetValue(ii2.metod) == 'получить ответ') {
+      return RussiaScriptUser.sysModules['Chat Bot'].otvet[RussiaScriptGetValue(ii2['запрос'])]
+    }
+  }
 }
 function SessionRussiaScript() {
   SessionRussiaScript = {
@@ -624,12 +634,12 @@ function runRussiaScript(code) {
   i = 0
   i2 = 'true'
   while (i2) {
+    i++
     if (codeRussiaScript.length < i) {
       i2 = (false)
     } else {
       i2 = (true)
     }
-    i++
     i3 = codeRussiaScript[i]
     i4 = i3.command
     i5 = i3.params
@@ -728,6 +738,11 @@ function runRussiaScript(code) {
     }
     if (i4 == 'alert') {
       alert(RussiaScriptGetValue(i5))
+    }
+    if (i4 == 'чат-бот') {
+      if (RussiaScriptGetValue(i5.metod) == 'Задать ответ') {
+        RussiaScriptUser.sysModules['Chat Bot'].otvet[RussiaScriptGetValue(i5['запрос'])] = RussiaScriptGetValue(i5['ответ'])
+      }
     }
   }
 }
