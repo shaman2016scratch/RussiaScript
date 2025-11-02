@@ -594,6 +594,12 @@ function RussiaScriptGetValue(v) {
       return RussiaScriptUser.sysModules['Chat Bot'].otvet[RussiaScriptGetValue(ii2['запрос'])]
     }
   }
+  if (ii == 'получить get-параменты') {
+    // Не поддерживается в node.js, только в браузере.
+    const url = new URL(window.location)
+    const searchParams = url.searchParams
+    return searchParams.get(ii2)
+  }
 }
 function SessionRussiaScript() {
   SessionRussiaScript = {
