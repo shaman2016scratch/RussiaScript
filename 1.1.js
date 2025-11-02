@@ -89,13 +89,13 @@ function RussiaScriptTerminal(command, params) {
 function RussiaScriptGetValue(v) {
   ii = v.type
   ii2 = v.value
-  if (ii = 'текст') {
+  if (ii == 'текст') {
     return (ii2)
   }
-  if (ii = 'переменная') {
-    return peremens[ii2]
+  if (ii == 'переменная') {
+    return Peremens[ii2]
   }
-  if (ii = 'get') {
+  if (ii == 'get') {
     return fetch(ii2, {  
       method: 'GET',  
       headers: { 
@@ -103,7 +103,7 @@ function RussiaScriptGetValue(v) {
       }
     })
   }
-  if (ii = 'зget') {
+  if (ii == 'зget') {
     return fetch(RussiaScriptGetValue(ii2), {  
       method: 'GET',  
       headers: { 
@@ -111,7 +111,7 @@ function RussiaScriptGetValue(v) {
       }
     })
   }
-  if (ii = 'post') {
+  if (ii == 'post') {
     return fetch(ii2, {  
       method: 'POST',  
       headers: { 
@@ -119,7 +119,7 @@ function RussiaScriptGetValue(v) {
       }
     })
   }
-  if (ii = 'зpost') {
+  if (ii == 'зpost') {
     return fetch(RussiaScriptGetValue(ii2), {  
       method: 'POST',  
       headers: { 
@@ -127,7 +127,7 @@ function RussiaScriptGetValue(v) {
       }
     })
   }
-  if (ii = 'delete') {
+  if (ii == 'delete') {
     return fetch(ii2, {  
       method: 'DELETE',  
       headers: { 
@@ -135,7 +135,7 @@ function RussiaScriptGetValue(v) {
       }
     })
   }
-  if (ii = 'зdelete') {
+  if (ii == 'зdelete') {
     return fetch(RussiaScriptGetValue(ii2), {  
       method: 'DELETE',  
       headers: { 
@@ -585,8 +585,8 @@ function RussiaScriptGetValue(v) {
   if (ii == 'prompt') {
     return prompt(RussiaScriptGetValue(ii2))
   }
-  if (ii == 'comfirm') {
-    return comfirm(RussiaScriptGetValue(ii2))
+  if (ii == 'confirm') {
+    return confirm(RussiaScriptGetValue(ii2))
   }
   if (ii == 'чат-бот') {
     if (RussiaScriptGetValue(ii2.metod) == 'получить ответ') {
@@ -694,7 +694,7 @@ function runRussiaScript(code) {
       }
     }
     if (i4 == 'Задать переменной значение') {
-      peremens[RussiaScriptGetValue(i5.per)] = RussiaScriptGetValue(i5.value)
+      Peremens[RussiaScriptGetValue(i5.per)] = RussiaScriptGetValue(i5.value)
     }
     if (i4 == 'Импортировать расширение' || i4 == 'Импротировать библиотеку') {
       console.error(`RussiaScript error (line ${i}): command 'import' outdated, use the terminal RussiaScript|Команда '${i4}' устарела, используйте терминал + команду lib (lib, ext, либ)`)
@@ -712,16 +712,16 @@ function runRussiaScript(code) {
     }
     if (i4 == 'если') {
       if (RussiaScriptGetValue(i5.bol)) {
-        RunRussiaScript(RussiaScriptGetValue(i5["то"]))
+        runRussiaScript(RussiaScriptGetValue(i5["то"]))
       } else {
-        RunRussiaScript(RussiaScriptGetValue(i5["иначе"]))
+        runRussiaScript(RussiaScriptGetValue(i5["иначе"]))
       }
     }
     if (i4 == 'js-функция') {
       RussiaScriptUser.func[RussiaScriptGetValue(i5.name)] = `function(args) \{ ${RussiaScriptGetValue(i5.code)} \}`
     }
     if (i4 == 'rs-функция') {
-      RussiaScriptUser.func[RussiaScriptGetValue(i5.name)] = `function(args) \{ RunRussiaScript${RussiaScriptGetValue(i5.code)} \}`
+      RussiaScriptUser.func[RussiaScriptGetValue(i5.name)] = `function(args) \{ runRussiaScript${RussiaScriptGetValue(i5.code)} \}`
     }
     if (i4 == 'пользователь' || i4 == 'user') {
       if (i5.type == 'функция') {
@@ -733,7 +733,7 @@ function runRussiaScript(code) {
     }
     if (i4 == 'пока') {
       while (RussiaScriptGetValue(i5.bol)) {
-        RunRussiaScript(RussiaScriptGetValue(i5.code))
+        runRussiaScript(RussiaScriptGetValue(i5.code))
       }
     }
     if (i4 == 'alert') {
