@@ -9,11 +9,27 @@ sys = {
 }
 RussiaScriptUser = {
   "func": {
-    "return": "function\(args\) \{ return \(args\) \}",
+    "return": "function(args) { return (args) }",
   },
   "libs": {},
   "libsInfo": {},
   "LibsList": [],
+  "rs консоль": [],
+}
+function RsJsConsole(ty, te) {
+  if (ty === 'log') {
+    console.log(`RussiaScript: ${te}`)
+  }
+  if (ty === 'warn') {
+    console.warn(`RussiaScript warn: ${te}`)
+  }
+  if (ty === 'error') {
+    console.error(`RussiaScript error: ${te}`)
+  }
+  if (ty === 'input') {
+    console.log(`RussiaScript: ${te}`)
+    console.log(prompt(`RussiaScript input: ${te}`))
+  }
 }
 function RussiaScriptTerminal(command, params) {
   if (command == 'pip Extension') {
@@ -712,9 +728,6 @@ function runRussiaScript(code) {
     }
     if (i4 == 'alert') {
       alert(RussiaScriptGetValue(i5))
-    }
-    if (i4 == 'rs-консоль') {
-      
     }
   }
 }
