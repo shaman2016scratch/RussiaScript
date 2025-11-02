@@ -564,6 +564,9 @@ function RussiaScriptGetValue(v) {
   if (ii == 'prompt') {
     return prompt(RussiaScriptGetValue(ii2))
   }
+  if (ii == 'comfirm') {
+    return comfirm(RussiaScriptGetValue(ii2))
+  }
 }
 function SessionRussiaScript() {
   SessionRussiaScript = {
@@ -667,8 +670,8 @@ function runRussiaScript(code) {
     if (i4 == 'Задать переменной значение') {
       peremens[RussiaScriptGetValue(i5.per)] = RussiaScriptGetValue(i5.value)
     }
-    if (i4 == 'Импортировать расширение') {
-      console.error("RussiaScript Error: Import, Extensions (Libraries) not support!")
+    if (i4 == 'Импортировать расширение' || i4 == 'Импротировать библиотеку') {
+      console.error(`RussiaScript error (line ${i}): command 'import' outdated, use the terminal RussiaScript|Команда '${i4}' устарела, используйте терминал + команду lib (lib, ext, либ)`)
     }
     if (i4 == 'js-консоль') {
       if (i5['метод'] == 'лог') {
@@ -709,6 +712,9 @@ function runRussiaScript(code) {
     }
     if (i4 == 'alert') {
       alert(RussiaScriptGetValue(i5))
+    }
+    if (i4 == 'rs-консоль') {
+      
     }
   }
 }
