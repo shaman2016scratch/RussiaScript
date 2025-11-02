@@ -3,6 +3,7 @@
 RussiaScriptOutput = []
 Peremens = {}
 filesRS = []
+filesDataRS = {}
 sys = {
   "lang": "ru",
   "os": "kakaya-to operactionka"
