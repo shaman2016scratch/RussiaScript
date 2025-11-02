@@ -751,14 +751,58 @@ function runRussiaScript(code) {
         RussiaScriptUser.sysModules['Chat Bot'].otvet[RussiaScriptGetValue(i5['запрос'])] = RussiaScriptGetValue(i5['ответ'])
       }
     }
+    if (i4 == 'rs-js-консоль') {
+      if (i5['метод'] == 'лог') {
+        RsJsConsole('log', RussiaScriptGetValue(i5['значение']))
+      }
+      if (i5['метод'] == 'предупреждение') {
+        RsJsConsole('warn', RussiaScriptGetValue(i5['значение']))
+      }
+      if (i5['метод'] == 'ошибка') {
+        RsJsConsole('error', RussiaScriptGetValue(i5['значение']))
+      }
+      if (i5['метод'] == 'запрос') {
+        RsJsConsole('input', RussiaScriptGetValue(i5['значение']))
+      }
+    }
   }
 }
 function RunRsCodeFromUrl(url) {
-  getCode = fetch(url, {  
-    method: 'GET',  
-    headers: { 
-      "Content-Type": "application/json",  
+  fetch(url, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
     }
   })
-  runRussiaScript(getCode)
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then(code => {
+    runRussiaScript(code);
+  })
+  .catch(err => {
+    RsJsConsole('error', `Ошибка загрузки ${url}: ${err.message}`);
+  });
 }
+
+function initRussiaScript() {
+  const scripts = document.querySelectorAll('script[type="text/russiascript"]');
+
+  scripts.forEach(script => {
+    if (script.src) {
+      RunRsCodeFromUrl(script.src);
+    } else {
+      try {
+        const code = JSON.parse(script.textContent.trim());
+        runRussiaScript(code);
+      } catch (e) {
+        RsJsConsole('error', `Ошибка парсинга встроенного кода: ${e.message}`);
+      }
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', initRussiaScript);
