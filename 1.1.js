@@ -768,28 +768,17 @@ function runRussiaScript(code) {
   }
 }
 function RunRsCodeFromUrl(url) {
-  fetch(url, {
+  code = fetch(url, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
     }
   })
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    return response.json();
-  })
-  .then(code => {
-    runRussiaScript(code);
-  })
-  .catch(err => {
-    RsJsConsole('error', `Ошибка загрузки ${url}: ${err.message}`);
-  });
+  runRussiaScript(code);
 }
 
 function initRussiaScript() {
-  const scripts = document.querySelectorAll('script[type="text/russiascript"]');
+  const scripts = document.querySelectorAll('script[type="json/RussiaScript-RSF"]');
 
   scripts.forEach(script => {
     if (script.src) {
@@ -805,4 +794,4 @@ function initRussiaScript() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', initRussiaScript);
+document.addEventListener('DOMContentLoaded', initRussiaScript());
