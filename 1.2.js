@@ -670,15 +670,8 @@ function runRussiaScript(code) {
   codeRussiaScript = code.code
   SessionRussiaScript()
   termRussiaScript = code.terminal
-  i = 0
-  i2 = 'true'
-  while (i2) {
-    i++
-    if (codeRussiaScript.length < i) {
-      i2 = (false)
-    } else {
-      i2 = (true)
-    }
+  i2 = 'теперь нет смысла'
+  for (i = 0; i < codeRussiaScript.length; i++) {
     i3 = codeRussiaScript[i]
     i4 = i3.command
     i5 = i3.params
@@ -796,10 +789,10 @@ function runRussiaScript(code) {
       if (i5['метод'] == 'запрос') {
         RsJsConsole('input', RussiaScriptGetValue(i5['значение']))
       }
-      if (i4 === 'повторять раз') {
-        for (RScodeRunner.i = 0; RScodeRunner.i < RussiaScriptGetValue(i5['раз']); RScodeRunner.i++) {
-          runRussiaScript(`\{"libs":"","terminal":"","code":"${RussiaScriptGetValue(i5["код"])}"\}`)
-        }
+    }
+    if (i4 === 'повторять раз') {
+      for (RScodeRunner.i = 0; RScodeRunner.i < RussiaScriptGetValue(i5['раз']); RScodeRunner.i++) {
+        runRussiaScript(`\{"libs":"","terminal":"","code":"${RussiaScriptGetValue(i5["код"])}"\}`)
       }
     }
   }
