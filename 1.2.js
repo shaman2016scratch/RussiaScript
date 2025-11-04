@@ -6,7 +6,11 @@ filesRS = []
 filesDataRS = {}
 sys = {
   "lang": "ru",
-  "os": "kakaya-to operactionka"
+  "os": "kakaya-to operactionka",
+  "RussiaScript": {
+    "version": "1.2",
+    "terminal version": "1.2.0",
+  },
 }
 RussiaScriptUser = {
   "func": {
@@ -85,6 +89,24 @@ function RussiaScriptTerminal(command, params) {
   }
   if (command == 'get data files') {
     return filesDataRS
+  }
+  if (command === 'get lang') {
+    return sys.lang
+  }
+  if (command === 'get os') {
+    return sys.os
+  }
+  if (command === 'get user-agent') {
+    return SessionRussiaScript['user-agent']
+  }
+  if (command === 'get sys/RussiaScript') {
+    return sys.RussiaScript
+  }
+  if (command === 'get RussianScript version') {
+    return sys.RussiaScript.version
+  }
+  if (command === 'get terminale version') {
+    return sys.RussiaScript['terminal version']
   }
 }
 function RussiaScriptGetValue(v) {
@@ -600,12 +622,21 @@ function RussiaScriptGetValue(v) {
     const searchParams = url.searchParams
     return searchParams.get(ii2)
   }
+  if (ii == '≠' || ii == '!=') {
+    return (RussiaScriptGetValue(ii2[1]) != RussiaScriptGetValue(ii2[2]))
+  }
+  if (ii == '<=' || ii == '≤') {
+    return (RussiaScriptGetValue(ii2[1]) <= RussiaScriptGetValue(ii2[2]))
+  }
+  if (ii == '>=' || ii == '≥') {
+    return (RussiaScriptGetValue(ii2[1]) >= RussiaScriptGetValue(ii2[2]))
+  }
 }
 function SessionRussiaScript() {
   SessionRussiaScript = {
     "ОС": sys.os,
     "Язык": sys.lang,
-    "Версия RussiaScript": "1.1",
+    "Версия RussiaScript": sys.RussiaScript.version,
     "User-agent": "Mozilla/5.0"
   }
   UserAgent = fetch('https://httpbin.org/user-agent', {  
