@@ -2,7 +2,7 @@ const url = new URL(window.location)
 const searchParams = url.searchParams
 docData.txt = document.getElementById('lib')
 docData.lib = searchParams.get('lib')
-if (docData.lib === 'server') {
+if (docData.lib === 'terminalPlus') {
   lib = `
     ExtLibRS = {
       "version": "1.0",
@@ -27,6 +27,24 @@ if (docData.lib === 'server') {
       "reportersList": [
         "get version info",
       ],
+    }
+  `
+}
+if (docData.lib === 'server') {
+  lib = `
+    ExtLibRS = {
+      "version": "1.0",
+      "name": "RussiaScript server",
+      "id": "RS_server-sl",
+      "docs": "not",
+      "created by": "SHAMAN2016",
+    }
+    Ext_exampleExt = {
+      "data": ExtLibRS,
+      "commands": {},
+      "commandList": [],
+      "reporters": {},
+      "reportersList": [],
     }
   `
 }
