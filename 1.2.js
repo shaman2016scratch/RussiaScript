@@ -110,6 +110,9 @@ function RussiaScriptTerminal(command, params) {
   }
 }
 function RussiaScriptGetValue(v) {
+  if (typeof v === 'number' || typeof v === 'string') {
+    return v;
+  }
   ii = v.type
   ii2 = v.value
   if (ii == 'текст') {
@@ -576,7 +579,7 @@ function RussiaScriptGetValue(v) {
   if (ii == 'или') {
     return (RussiaScriptGetValue(ii2[1]) || RussiaScriptGetValue(ii2[2]))
   }
-  if (ii == '=') {
+  if (ii == '=' || ii == '==' || ii == '===') {
     return (RussiaScriptGetValue(ii2[1]) == RussiaScriptGetValue(ii2[2]))
   }
   if (ii == '<') {
