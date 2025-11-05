@@ -1,1 +1,4 @@
-docData.txt
+const url = new URL(window.location)
+const searchParams = url.searchParams
+docData.txt = document.getElementById('lib')
+docData.lib = searchParams.get('lib')
