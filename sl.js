@@ -22,7 +22,7 @@ if (docData.lib === 'server') {
         "set os",
       ],
       "reporters": {
-        "get info": "function(args) { if (args === '1.0') { return } }"
+        "get info": "function(args) { if (args === '1.2') { return {"creator":"shaman2016"} } }"
       },
       "reportersList": [
         "reporter"
