@@ -695,6 +695,9 @@ function runRussiaScript(code) {
   codeRussiaScript = code.code
   SessionRussiaScript()
   termRussiaScript = code.terminal
+  if (termRussiaScirpt) {
+    Peremens.term = RussiaScriptTerminal(termRussiaScirpt.com, termRussiaScript.par)
+  }
   i2 = 'теперь нет смысла'
   for (i = 0; i < codeRussiaScript.length; i++) {
     i3 = codeRussiaScript[i]
