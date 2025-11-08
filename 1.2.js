@@ -109,7 +109,7 @@ function RussiaScriptTerminal(command, params) {
     return sys.RussiaScript['terminal version']
   }
   if (command == 'pirs install lib from RussiaScriptLibs') {
-    Ext = fetch(`https://rp-sote.github.io/RussiaScriptLibs.site/lib/${params.ext.url}.lib?pocket=${params.ext.pocket}`, {  
+    Ext = fetch(`https://rp-site.github.io/RussiaScriptLibs.site/lib/${params.ext.url}.lib?pocket=${params.ext.pocket}`, {  
       method: 'GET',  
       headers: { 
         "Content-Type": "application/json",  
@@ -129,6 +129,25 @@ function RussiaScriptTerminal(command, params) {
     RussiaScriptUser.LibsList.push(eval(`${Ext}; return ExtLibRS.id`))
     RussiaScriptUser.libsInfo[params.ext.name] = eval(`${Ext}; return ExtLibRS`)
     RussiaScriptUser.libs[RussiaScriptUser.libsInfo[params.ext.name].id] = eval(`${Ext}; return Ext_${RussiaScript.libsInfo[params.ext.name].id}`)
+  }
+  if (command == 'pirs search') {
+    Ext = fetch(`https://shaman2016scratch.github.io/RussiaScript/search/`, {  
+      method: 'GET',  
+      headers: { 
+        "Content-Type": "application/json",  
+      }
+    })
+    if (Ext.reg[params.ext.name]) {
+      return true
+    } else {
+      return false
+    }
+  }
+  if (command === 'pirs uninstall') {
+    LibsList.splice(LibsList.indexOf(RussiaScriptUser.libsInfo[params.ext].id))
+    delete libs[RussiaScriptUser.libsInfo[params.ext].id]
+    delete libsInfo[RussiaScriptUser.libsInfo[params.ext].id]
+    return ('ok!')
   }
 }
 function RussiaScriptGetValue(v) {
@@ -515,7 +534,7 @@ function runRussiaScript(code) {
       fetch(i5.url, i5.params)
     }
     if (i4 == 'Вывести') {
-      RussiaScriptOutput.push(RussiaScriptGetValue(i5["Текст вывода"]))
+      RussiaScriptOutput.push(RussiaScriptGetValue(i5))
     }
     if (i4 == 'json') {
       RSjsonData = {
@@ -625,7 +644,7 @@ function runRussiaScript(code) {
     }
     if (i4 == 'return') {
       // для пользовательских функций
-      return i5
+      return RussiaScriptGetValue(i5)
     }
     if (i4 == 'ждать') {
       await new Promise(resolve => setTimeout(resolve, RussiaScriptGetValue(i5['миллисекунды'])))
