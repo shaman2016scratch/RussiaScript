@@ -149,6 +149,20 @@ function RussiaScriptTerminal(command, params) {
     delete libsInfo[RussiaScriptUser.libsInfo[params.ext].id]
     return ('ok!')
   }
+  if (command === 'pirs --help') {
+    ret = [
+      "RussiaScript Terminal help. command pirs",
+      "pirs — package installer RussiaScript",
+      "commands:",
+      "1. pirs install lib",
+      "2. pirs install lib from RussiaScriptLibs",
+      "3. pirs install syslib",
+      "4. pirs search",
+      "5. pirs uninstall",
+      "6. pirs --help",
+    ]
+    return ret
+  }
 }
 function RussiaScriptGetValue(v) {
   if (typeof v === 'number' || typeof v === 'string' || typeof v === 'object' || typeof v === 'boolean') {
