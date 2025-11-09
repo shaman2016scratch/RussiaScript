@@ -23,3 +23,7 @@ def main():
       "commands": ["command2"],
     },
   })
+  RussiaScriptLibs.v1-2.ok()
+  js('console.log("ok! status:" + RussiaScriptLibs.v1-2.ok.status())')
+main()
+print('Program Finished')
