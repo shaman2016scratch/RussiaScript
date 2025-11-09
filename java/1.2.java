@@ -1,3 +1,4 @@
+import java.util.Scanner;
 public class RussiaScript
 {
   public static void main(String[] args) {
