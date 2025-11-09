@@ -1,0 +1,25 @@
+{
+  "type": "json",
+  "rs v": "1.2",
+  "v": "1.0",
+  "name": "JsonRsFromes",
+  "exampleFrom": {
+    "from1": {
+      "reporters": [
+        "reporter1",
+      ],
+      "commands": [
+        "command1",
+      ],
+    },
+    "from2": {
+      "reporters": [
+        "reporter2",
+      ],
+      "commands": [
+        "command2",
+        "command3",
+      ],
+    },
+  },
+}
