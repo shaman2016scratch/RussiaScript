@@ -42,6 +42,28 @@ function RsJsConsole(ty, te) {
   }
 }
 function RussiaScriptTerminal(command, params) {
+  commandsTerminRs = [
+    "pirs install lib",
+    "get os",
+    "get session",
+    "get system",
+    "get files",
+    "new file",
+    "new file in",
+    "get data files",
+    "get os2",
+    "get user-agent",
+    "get sys/RussiaScript",
+    "get RussianScript version",
+    "get terminale version",
+    "pirs install lib",
+    "pirs install lib from RussiaScriptLibs",
+    "pirs install syslib",
+    "pirs search",
+    "pirs uninstall",
+    "pirs --help",
+  ]
+  commandUserTerRs = {}
   if (command == 'pirs install lib') {
     Ext = fetch(params.ext.url, {  
       method: 'GET',  
@@ -93,7 +115,7 @@ function RussiaScriptTerminal(command, params) {
   if (command === 'get lang') {
     return sys.lang
   }
-  if (command === 'get os') {
+  if (command === 'get os2') {
     return sys.os
   }
   if (command === 'get user-agent') {
@@ -162,6 +184,12 @@ function RussiaScriptTerminal(command, params) {
       "6. pirs --help",
     ]
     return ret
+  }
+  if (commandsTerminRs.indexOf(command) === -1) {
+    if (commandUserTerRs[command]) {
+      if (params) commandUserTerRs[command](params)
+      if (!params) commandUserTerRs[command]
+    }
   }
 }
 function RussiaScriptGetValue(v) {
