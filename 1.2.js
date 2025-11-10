@@ -62,6 +62,7 @@ function RussiaScriptTerminal(command, params) {
     "pirs search",
     "pirs uninstall",
     "pirs --help",
+    "git clone",
   ]
   commandUserTerRs = {}
   if (command == 'pirs install lib') {
@@ -185,6 +186,24 @@ function RussiaScriptTerminal(command, params) {
     ]
     return ret
   }
+  if (command === 'git clone') {
+    Ext = fetch(`https://github.com/${params.file}.git.rsf`, {  
+      method: 'GET',  
+      headers: { 
+        "Content-Type": "application/json",  
+      }
+    })
+    runRussiaScript(Ext)
+  }
+  if (command === 'url clone') {
+    Ext = fetch(params.url, {  
+      method: 'GET',  
+      headers: { 
+        "Content-Type": "application/json",  
+      }
+    })
+    runRussiaScript(Ext)
+  }
   if (commandsTerminRs.indexOf(command) === -1) {
     if (commandUserTerRs[command]) {
       if (params) commandUserTerRs[command](params)
@@ -193,7 +212,7 @@ function RussiaScriptTerminal(command, params) {
   }
 }
 function RussiaScriptGetValue(v) {
-  if (typeof v === 'number' || typeof v === 'string' || typeof v === 'object' || typeof v === 'boolean') {
+  if (typeof v === 'number' || typeof v === 'string' || typeof v === 'boolean') {
     return v;
   }
   ii = v.type
