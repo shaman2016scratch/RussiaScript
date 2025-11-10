@@ -1,5 +1,15 @@
 // RussiaScript code
 // код RussiaScript
+RsProjectObject = {
+  "src": {},
+  "output": [],
+  "peremens": {},
+  "files": [],
+  "data files": {},
+  "sys": {},
+  "User": {},
+  "session": {},
+}
 RussiaScriptOutput = []
 Peremens = {}
 filesRS = []
@@ -554,23 +564,6 @@ function SessionRussiaScript() {
 }
 function runRussiaScript(code) {
   RScodeRunner = {}
-  DataTypes = [
-    "text",
-    "math",
-    "boolean",
-    "peremens",
-    "block"
-  ]
-  RussiaScriptCommands = [
-    "Очистить Вывод",
-    "http запрос",
-    "Вывести",
-    "json",
-    "dom",
-    "Задать переменной значение",
-    "Импортировать расширение",
-    "Получить значение переменной"
-  ]
   LibsRussiaScript = code.libs
   codeRussiaScript = code.code
   SessionRussiaScript()
