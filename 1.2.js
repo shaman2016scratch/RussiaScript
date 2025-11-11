@@ -546,6 +546,43 @@ function RussiaScriptGetValue(v) {
   if (ii == '>=' || ii == '≥') {
     return (RussiaScriptGetValue(ii2[1]) >= RussiaScriptGetValue(ii2[2]))
   }
+  if (ii == 'base64') {
+    if (ii2.type === 'encode') {
+      return encodeURIComponent(RussiaScriptGetValue(ii2["текст"])).replace(/%([0-9A-F]{2})/g, (match, p1) => String.fromCharCode('0x' + p1))
+    } else {
+      return decodeURIComponent(RussiaScriptGetValue(ii2["текст"])).replace(/%([0-9A-F]{2})/g, (match, p1) => String.fromCharCode('0x' + p1))
+    }
+  }
+  if (ii === 'искл или') {
+    return (ii2[0] && !ii2[1]) || (!ii2[0] && ii2[1]);
+  }
+  if (ii === 'slugify') {
+    const str = RussiaScriptGetValue(ii2).toLowerCase()
+    const translit = {
+      'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd',
+      'е': 'e', 'ё': 'yo', 'ж': 'zh', 'з': 'z', 'и': 'i',
+      'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n',
+      'о': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't',
+      'у': 'u', 'ф': 'f', 'х': 'h', 'ц': 'ts', 'ч': 'ch',
+      'ш': 'sh', 'щ': 'sch', 'ъ': '', 'ы': 'y', 'ь': '',
+      'э': 'e', 'ю': 'yu', 'я': 'ya'
+    }
+    let slug = str.replace(/[а-яё]/gi, char => translit[char] || '');
+    slug = slug.replace(/[^a-z0-9]+/g, '-');
+    slug = slug.replace(/-+/g, '-').replace(/^-|-$/g, '');
+    return slug;
+  }
+  if (ii == 'url') {
+    if (ii2.type === 'encode') {
+      return encodeURIComponent(RussiaScriptGetValue(ii2["текст"]))
+    } else {
+      return decodeURIComponent(RussiaScriptGetValue(ii2["текст"]))
+    }
+  }
+  if (ii === 'длина') {
+    return String(RussiaScriptGetValue(ii2)).length;
+  }
+  
 }
 function SessionRussiaScript() {
   SessionRussiaScript = {
