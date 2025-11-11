@@ -582,7 +582,9 @@ function RussiaScriptGetValue(v) {
   if (ii === 'длина') {
     return String(RussiaScriptGetValue(ii2)).length;
   }
-  
+  if (ii === 'шаблон') {
+    return preprocessTemplate(RussiaScriptGetValue(ii2))
+  }
 }
 function SessionRussiaScript() {
   SessionRussiaScript = {
@@ -750,6 +752,28 @@ function RunRsCodeFromUrl(url) {
     }
   })
   runRussiaScript(code);
+}
+function preprocessTemplate(templateStr) {
+  return templateStr.replace(/\$\{([^}]+)\}/g, (match, innerContent) => {
+    try {
+      let parsed;
+      try {
+        parsed = JSON.parse(innerContent);
+      } catch (e) {
+        parsed = innerContent;
+      }
+
+      const result = RussiaScriptGetValue(parsed);
+
+      return typeof result === 'object' && result !== null
+        ? JSON.stringify(result)
+        : String(result);
+
+    } catch (err) {
+      console.error('Ошибка в шаблоне:', err);
+      return match;
+    }
+  });
 }
 
 function initRussiaScript() {
