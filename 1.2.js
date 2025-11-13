@@ -35,6 +35,7 @@ RussiaScriptUser = {
     "Chat Bot": {},
   },
 }
+RsSrc = {}
 function RussiaScriptPomogFunc(args) {}
 function RsJsConsole(ty, te) {
   if (ty === 'log') {
@@ -759,7 +760,7 @@ function runRussiaScript(code) {
         Peremens.err = true
       }
     }
-    if (i4 === 'большой если') {
+    if (i4 === 'большой если иначе') {
       RScodeRunner.i2 === 'false'
       for (RScodeRunner.i = 0; RScodeRunner.i < i5.codes.length; RScodeRunner.i++) {
         if (RussiaScriptGetValue(i5.codes[RScodeRunner.i].bol) && RScodeRunner.i2 === false) {
@@ -768,7 +769,16 @@ function runRussiaScript(code) {
         }
       }
       if (RScodeRunner.i2 === 'false') {
-        runRussiaScript(`\{"libs":"","terminal":"","code":"${RussiaScriptGetValue(i5.codes[RScodeRunner.i].code)}"\}`)
+        runRussiaScript(`\{"libs":"","terminal":"","code":"${RussiaScriptGetValue(i5.else)}"\}`)
+      }
+    }
+    if (i4 === 'большой если') {
+      RScodeRunner.i2 === 'false'
+      for (RScodeRunner.i = 0; RScodeRunner.i < i5.codes.length; RScodeRunner.i++) {
+        if (RussiaScriptGetValue(i5.codes[RScodeRunner.i].bol) && RScodeRunner.i2 === false) {
+          RScodeRunner.i2 = true
+          runRussiaScript(`\{"libs":"","terminal":"","code":"${RussiaScriptGetValue(i5.codes[RScodeRunner.i].code)}"\}`)
+        }
       }
     }
   }
