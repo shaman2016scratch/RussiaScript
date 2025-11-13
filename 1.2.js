@@ -222,6 +222,28 @@ function RussiaScriptTerminal(command, params) {
     }
   }
 }
+function publicRS(args, n) {
+  if (n === 1) {
+    publicArgs = args
+    publicCode = publicArgs.code
+    publicCode = publicCode.split("\n")
+    publicClass = publicArgs.class
+    public = {
+      "i": 0,
+    }
+    for (public.i = 0; public.i < publicCode.length; public.i++) {
+      public.i2 = publicCode[public.i] // command
+      public.i3 = publicCode[public.i + 1] // params
+      if (public.i2 == 'let a main()') {
+        public.main = {}; public.main.i = 0; public.main.code = public.i3.split("\n"); puclic.i++;
+        for (public.main.i = 0; public.main.i < public.main.code.length; public.main.i++) {
+          public.i++
+          public.main.i2 = public.main.code[public.main.i];
+        }
+      }
+    }
+  }
+}
 function RussiaScriptGetValue(v) {
   if (typeof v === 'number' || typeof v === 'string' || typeof v === 'boolean') {
     return v;
@@ -614,6 +636,8 @@ function runRussiaScript(code) {
   codeRussiaScript = code.code
   SessionRussiaScript()
   termRussiaScript = code.terminal
+  nameRussiaScirpt = code.name
+  versionRussiaScript = code.version
   if (termRussiaScirpt) {
     Peremens.term = RussiaScriptTerminal(termRussiaScirpt.com, termRussiaScript.par)
   }
@@ -780,6 +804,9 @@ function runRussiaScript(code) {
           runRussiaScript(`\{"libs":"","terminal":"","code":"${RussiaScriptGetValue(i5.codes[RScodeRunner.i].code)}"\}`)
         }
       }
+    }
+    if (i4 === 'публик RS1-2$1') {
+      publicRS(i5, 1)
     }
   }
 }
