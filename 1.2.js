@@ -236,7 +236,11 @@ function publicRS(args, n) {
         for (public.main.i = 0; public.main.i < public.main.code.length; public.main.i++) {
           public.i++; public.main.i2 = public.main.code[public.main.i]; public.main.i3 = public.main.code[public.main.i + 1]
           if (public.main.i2 === 'System.out.printf') {
-            public.main.i4 = {}; public.main.i4.from = 'publicRS1'; public.main.i4.text = RussiaScriptGetValue(public.main.i3); RussiaScriptOutput.push(public.main.i4);
+            public.main.i4 = {}; public.main.i4.from = 'publicRS1'; public.main.i4.text = RussiaScriptGetValue(public.main.i3); RussiaScriptOutput.push(public.main.i4); public.i++;
+          }
+          if (public.main.i2 === 'System.RunTermianl') {
+            RussiaScriptTerminal()
+            public.i++
           }
         }
       }
