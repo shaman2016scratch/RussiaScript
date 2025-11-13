@@ -20,6 +20,16 @@ sys = {
   "RussiaScript": {
     "version": "1.2",
     "terminal version": "1.2.0",
+    "public": {
+      1: {
+        "version": "1.0",
+      },
+    },
+  },
+  "publicRS": {
+    1: {
+      "Peremens": {},
+    },
   },
 }
 RussiaScriptUser = {
@@ -239,8 +249,10 @@ function publicRS(args, n) {
             public.main.i4 = {}; public.main.i4.from = 'publicRS1'; public.main.i4.text = RussiaScriptGetValue(public.main.i3); RussiaScriptOutput.push(public.main.i4); public.i++;
           }
           if (public.main.i2 === 'System.RunTermianl') {
-            RussiaScriptTerminal()
-            public.i++
+            RussiaScriptTerminal(public.main.i3.command, public.main.i3.args); public.i++;
+          }
+          if (public.main.i2 === 'set var') {
+            sys.public.1.Peremens[public.main.i3.var] = public.main.i3.val; public.i++;
           }
         }
       }
