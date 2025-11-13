@@ -225,6 +225,9 @@ function RussiaScriptGetValue(v) {
   if (typeof v === 'number' || typeof v === 'string' || typeof v === 'boolean') {
     return v;
   }
+  if (v === 'err') {
+    return Peremens.err
+  }
   ii = v.type
   ii2 = v.value
   if (ii == 'текст') {
@@ -585,6 +588,9 @@ function RussiaScriptGetValue(v) {
   if (ii === 'шаблон') {
     return preprocessTemplate(RussiaScriptGetValue(ii2))
   }
+  if (ii === 'eval') {
+    return runRussiaScript(RussiaScriptGetValue(ii2))
+  }
 }
 function SessionRussiaScript() {
   SessionRussiaScript = {
@@ -741,6 +747,29 @@ function runRussiaScript(code) {
     }
     if (i4 == 'ждать') {
       await new Promise(resolve => setTimeout(resolve, RussiaScriptGetValue(i5['миллисекунды'])))
+    }
+    if (i4 === 'eval') {
+      runRussiaScript(RussiaScriptGetValue(i5))
+    }
+    if (i4 === 'если иначе ошибка') {
+      if (RussiaScriptGetValue(i5.bol)) {
+        runRussiaScript(RussiaScriptGetValue(i5.code))
+      } else {
+        RsJsConsole('error', 'error for script "if else error"')
+        Peremens.err = true
+      }
+    }
+    if (i4 === 'большой если') {
+      RScodeRunner.i2 === 'false'
+      for (RScodeRunner.i = 0; RScodeRunner.i < i5.codes.length; RScodeRunner.i++) {
+        if (RussiaScriptGetValue(i5.codes[RScodeRunner.i].bol) && RScodeRunner.i2 === false) {
+          RScodeRunner.i2 = true
+          runRussiaScript(`\{"libs":"","terminal":"","code":"${RussiaScriptGetValue(i5.codes[RScodeRunner.i].code)}"\}`)
+        }
+      }
+      if (RScodeRunner.i2 === 'false') {
+        runRussiaScript(`\{"libs":"","terminal":"","code":"${RussiaScriptGetValue(i5.codes[RScodeRunner.i].code)}"\}`)
+      }
     }
   }
 }
