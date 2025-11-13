@@ -224,21 +224,20 @@ function RussiaScriptTerminal(command, params) {
 }
 function publicRS(args, n) {
   if (n === 1) {
-    publicArgs = args
-    publicCode = publicArgs.code
-    publicCode = publicCode.split("\n")
+    publicArgs = args; publicCode = publicArgs.code; publicCode = publicCode.split("\n");
     publicClass = publicArgs.class
     public = {
       "i": 0,
     }
     for (public.i = 0; public.i < publicCode.length; public.i++) {
-      public.i2 = publicCode[public.i] // command
-      public.i3 = publicCode[public.i + 1] // params
+      public.i2 = publicCode[public.i] /* command */; public.i3 = publicCode[public.i + 1] /* params */;
       if (public.i2 == 'let a main()') {
         public.main = {}; public.main.i = 0; public.main.code = public.i3.split("\n"); puclic.i++;
         for (public.main.i = 0; public.main.i < public.main.code.length; public.main.i++) {
-          public.i++
-          public.main.i2 = public.main.code[public.main.i];
+          public.i++; public.main.i2 = public.main.code[public.main.i]; public.main.i3 = public.main.code[public.main.i + 1]
+          if (public.main.i2 === 'System.out.printf') {
+            public.main.i4 = {}; public.main.i4.from = 'publicRS1'; public.main.i4.text = RussiaScriptGetValue(public.main.i3); RussiaScriptOutput.push(public.main.i4);
+          }
         }
       }
     }
