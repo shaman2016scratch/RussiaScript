@@ -204,6 +204,7 @@ function RussiaScriptTerminal(command, params) {
       "4. pirs search",
       "5. pirs uninstall",
       "6. pirs --help",
+      "7. pirs info lib",
     ]
     return ret
   }
@@ -224,6 +225,18 @@ function RussiaScriptTerminal(command, params) {
       }
     })
     runRussiaScript(Ext)
+  }
+  if (command === 'pirs info lib') {
+    return RussiaScriptUser.libsInfo[params.ext.name]
+  }
+  if (command === 'pirs list') {
+    return RussiaScriptUser.LibsList
+  }
+  if (command === 'rs reset') {
+    Peremens = {}
+    RussiaScriptUser.libs = {}
+    RussiaScriptUser.libsInfo = {}
+    RussiaScriptUser.LibsList = []
   }
   if (commandsTerminRs.indexOf(command) === -1) {
     if (commandUserTerRs[command]) {
@@ -257,6 +270,10 @@ function publicRS(args, n) {
         }
       }
     }
+  }
+  if (n === 2) {
+    // publicSQL/RussiaScript SQL
+    publicArgs = args; publicCode = publicArgs.code; publicCode = publicCode.split("\n");
   }
 }
 function RussiaScriptGetValue(v) {
@@ -843,35 +860,18 @@ function preprocessTemplate(templateStr) {
       } catch (e) {
         parsed = innerContent;
       }
-
       const result = RussiaScriptGetValue(parsed);
-
       return typeof result === 'object' && result !== null
         ? JSON.stringify(result)
         : String(result);
-
     } catch (err) {
       console.error('Ошибка в шаблоне:', err);
       return match;
     }
   });
 }
-
-function initRussiaScript() {
-  const scripts = document.querySelectorAll('script[type="json/RussiaScript-RSF"]');
-
-  scripts.forEach(script => {
-    if (script.src) {
-      RunRsCodeFromUrl(script.src);
-    } else {
-      try {
-        const code = JSON.parse(script.textContent.trim());
-        runRussiaScript(code);
-      } catch (e) {
-        RsJsConsole('error', `Ошибка парсинга встроенного кода: ${e.message}`);
-      }
-    }
-  });
+function MakeError(error, params) {
+  if (error === 'syntax error') {
+    console.error(`RussiaScript Syntax Error (of line ${params.line}): ${params.error}`)
+  }
 }
-
-document.addEventListener('DOMContentLoaded', initRussiaScript());
