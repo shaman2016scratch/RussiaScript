@@ -22,10 +22,6 @@ Ext_exampleExt = {
   ],
 }
 fromed_exampleExt = {
-  "fromModule": {
-    "src": "@Shaman2016Scratch/RussiaScirpt:main/fromsModule/1.2/1.json", /* должно находиться в списке доступных src */
-    "type": "txt/json", /* выбор из txt/json, txt/python и txt/javascript */
-  },
   "fromes": {},
   "fromeList": [],
 }
