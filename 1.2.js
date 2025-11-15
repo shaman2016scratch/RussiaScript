@@ -678,7 +678,7 @@ function runRussiaScript(code) {
     i3 = codeRussiaScript[i]
     i4 = i3.command
     i5 = i3.params
-    if (i4 == 'Очистить Вывод') {
+    if (i4 == 'очистить вывод') {
       RussiaScriptOutput = []
     }
     if (i4 == 'http запрос') {
@@ -689,28 +689,8 @@ function runRussiaScript(code) {
       ]
       fetch(i5.url, i5.params)
     }
-    if (i4 == 'Вывести') {
+    if (i4 == 'вывести') {
       RussiaScriptOutput.push(RussiaScriptGetValue(i5))
-    }
-    if (i4 == 'json') {
-      RSjsonData = {
-        "Operations": [
-          "в Json-строку",
-          "в JavaScript обьект",
-          "Пустой объект",
-          "Пустой Массив",
-          "Задать ключ в объекте",
-          "Добавить элемент в начало массива",
-          "Добавить элемент в массив",
-          "Добавить элемент в массив в место",
-          "Удалить из объекта",
-          "Удалить последний элемент массива",
-          "Удалить первый элемент массива",
-          "Удалить элемент массива",
-          "Получить элемент массива",
-          "Получить элемент объекта"
-        ]
-      }
     }
     if (i4 == 'dom') {
       RsDomData = {
@@ -728,10 +708,10 @@ function runRussiaScript(code) {
         document.getElementById(RussiaScriptGetValue(i5["элемент"])).textContent = RussiaScriptGetValue(i5["значение"]);
       }
     }
-    if (i4 == 'Задать переменной значение') {
+    if (i4 == 'задать переменной значение') {
       Peremens[RussiaScriptGetValue(i5.per)] = RussiaScriptGetValue(i5.value)
     }
-    if (i4 == 'Импортировать расширение' || i4 == 'Импротировать библиотеку') {
+    if (i4 == 'импортировать расширение' || i4 == 'импротировать библиотеку') {
       console.error(`RussiaScript error (line ${i}): command 'import' outdated, use the terminal RussiaScript|Команда '${i4}' устарела, используйте терминал + команду lib (lib, ext, либ)`)
     }
     if (i4 == 'js-консоль') {
