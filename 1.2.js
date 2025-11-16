@@ -441,7 +441,7 @@ function RussiaScriptGetValue(v) {
       ii6 = RussiaScriptGetValue(ii4.key)
       ii7 = RussiaScriptGetValue(ii4.value)
       ii5[ii6] = ii7
-      return ii5[ii6]
+      return ii5
     }
     if (ii3 == 'добавить элемент в начало массива') {
       ii5 = RussiaScriptGetValue(ii4.array)
