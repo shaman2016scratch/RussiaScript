@@ -858,5 +858,15 @@ function preprocessTemplate(templateStr) {
 function MakeError(error, params) {
   if (error === 'syntax error') {
     console.error(`RussiaScript Syntax Error (of line ${params.line}): ${params.error}`)
+  } else if (error === 'type error') {
+    console.error(`RussiaScript Type error (of line ${params.line}): ${params.error}`)
+  } else if (error === 'terminal error') {
+    console.error(`Terminal RussiaScript error: ${params.error}`)
+  } else if (error === 'command not found') {
+    console.error(`RussiaScript command not found (of line ${params.line}): ${params.error}`)
+  } else if (error === 'reporter not found') {
+    console.error(`RussiaScript reporter not found (of line ${params.line}): ${params.error}`)
+  } else {
+    console.error(`Error RussiaScript  MakeError(): Error not found`)
   }
 }
