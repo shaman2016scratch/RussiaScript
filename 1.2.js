@@ -84,6 +84,10 @@ function RussiaScriptTerminal(command, params) {
     "pirs uninstall",
     "pirs --help",
     "git clone",
+    "url clone",
+    "pirs info lib",
+    "pirs list",
+    "rs reset",
   ]
   commandUserTerRs = {}
   if (command == 'pirs install lib') {
@@ -205,6 +209,7 @@ function RussiaScriptTerminal(command, params) {
       "5. pirs uninstall",
       "6. pirs --help",
       "7. pirs info lib",
+      "8. pirs list",
     ]
     return ret
   }
