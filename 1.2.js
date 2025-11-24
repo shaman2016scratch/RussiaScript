@@ -247,6 +247,8 @@ function RussiaScriptTerminal(command, params) {
     if (commandUserTerRs[command]) {
       if (params) commandUserTerRs[command](params)
       if (!params) commandUserTerRs[command]
+    } else {
+      MakeError('terminal error', 'Terminal Command not found. Check that the command name of the RussiaScript terminal is correct.')
     }
   }
 }
@@ -861,7 +863,7 @@ function MakeError(error, params) {
   } else if (error === 'type error') {
     console.error(`RussiaScript Type error (of line ${params.line}): ${params.error}`)
   } else if (error === 'terminal error') {
-    console.error(`Terminal RussiaScript error: ${params.error}`)
+    console.error(`Terminal RussiaScript error: ${params}`)
   } else if (error === 'command not found') {
     console.error(`RussiaScript command not found (of line ${params.line}): ${params.error}`)
   } else if (error === 'reporter not found') {
