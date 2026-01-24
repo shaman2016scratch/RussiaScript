@@ -1,6 +1,6 @@
 // RussiaScript code
 // код RussiaScript
-RsProjectObject = {
+let RsProjectObject = {
   "src": {},
   "output": [],
   "peremens": {},
@@ -10,11 +10,11 @@ RsProjectObject = {
   "User": {},
   "session": {},
 }
-RussiaScriptOutput = []
-Peremens = {}
-filesRS = []
-filesDataRS = {}
-sys = {
+let RussiaScriptOutput = []
+let Peremens = {}
+let filesRS = []
+let filesDataRS = {}
+let sys = {
   "lang": "ru",
   "os": "kakaya-to operactionka",
   "RussiaScript": {
@@ -32,7 +32,7 @@ sys = {
     },
   },
 }
-RussiaScriptUser = {
+let RussiaScriptUser = {
   "func": {
     "return": "function(args) { return (args) }",
   },
@@ -45,7 +45,8 @@ RussiaScriptUser = {
     "Chat Bot": {},
   },
 }
-RsSrc = {}
+let RsSrc = {}
+let SessionRussiaScript = {}
 function RussiaScriptPomogFunc(args) {}
 function RsJsConsole(ty, te) {
   if (ty === 'log') {
@@ -63,7 +64,7 @@ function RsJsConsole(ty, te) {
   }
 }
 function RussiaScriptTerminal(command, params) {
-  commandsTerminRs = [
+  let commandsTerminRs = [
     "pirs install lib",
     "get os",
     "get session",
@@ -89,7 +90,7 @@ function RussiaScriptTerminal(command, params) {
     "pirs list",
     "rs reset",
   ]
-  commandUserTerRs = {}
+  let commandUserTerRs = {}
   if (command == 'pirs install lib') {
     Ext = fetch(params.ext.url, {  
       method: 'GET',  
@@ -254,9 +255,9 @@ function RussiaScriptTerminal(command, params) {
 }
 function publicRS(args, n) {
   if (n === 1) {
-    publicArgs = args; publicCode = publicArgs.code; publicCode = publicCode.split("\n");
-    publicClass = publicArgs.class
-    public = {
+    let publicArgs = args; let publicCode = publicArgs.code; publicCode = publicCode.split("\n");
+    let publicClass = publicArgs.class
+    let public = {
       "i": 0,
     }
     for (public.i = 0; public.i < publicCode.length; public.i++) {
@@ -280,7 +281,7 @@ function publicRS(args, n) {
   }
   if (n === 2) {
     // publicSQL/RussiaScript SQL
-    publicArgs = args; publicCode = publicArgs.code; publicCode = publicCode.split("\n");
+    let publicArgs = args; let publicCode = publicArgs.code; publicCode = publicCode.split("\n");
   }
 }
 function RussiaScriptGetValue(v) {
@@ -314,13 +315,13 @@ function RussiaScriptGetValue(v) {
     ii3 = ii2['операция']
     ii4 = ii2['значение']
     if (ii3 == '+') {
-      ii5 = RussiaScriptGetValue(ii4[1])
-      ii6 = RussiaScriptGetValue(ii4[2])
+      ii5 = RussiaScriptGetValue(ii4[0])
+      ii6 = RussiaScriptGetValue(ii4[1])
       return (ii5 + ii6)
     }
     if (ii3 == '-') {
-      ii5 = RussiaScriptGetValue(ii4[1])
-      ii6 = RussiaScriptGetValue(ii4[2])
+      ii5 = RussiaScriptGetValue(ii4[0]])
+      ii6 = RussiaScriptGetValue(ii4[1])
       return (ii5 - ii6)
     }
     if (ii3 == '*') {
