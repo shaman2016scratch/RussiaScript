@@ -47,6 +47,11 @@ let RussiaScriptUser = {
 }
 let RsSrc = {}
 let SessionRussiaScript = {}
+let LibsRussiaScript = {}
+let codeRussiaScript = {}
+let termRussiaScript = {}
+let nameRussiaScirpt = {}
+let versionRussiaScript = {}
 function RussiaScriptPomogFunc(args) {}
 function RsJsConsole(ty, te) {
   if (ty === 'log') {
@@ -320,43 +325,43 @@ function RussiaScriptGetValue(v) {
       return (ii5 + ii6)
     }
     if (ii3 == '-') {
-      ii5 = RussiaScriptGetValue(ii4[0]])
+      ii5 = RussiaScriptGetValue(ii4[0])
       ii6 = RussiaScriptGetValue(ii4[1])
       return (ii5 - ii6)
     }
     if (ii3 == '*') {
-      ii5 = RussiaScriptGetValue(ii4[1])
-      ii6 = RussiaScriptGetValue(ii4[2])
+      ii5 = RussiaScriptGetValue(ii4[0])
+      ii6 = RussiaScriptGetValue(ii4[1])
       return (ii5 * ii6)
     }
     if (ii3 == '÷') {
-      ii5 = RussiaScriptGetValue(ii4[1])
-      ii6 = RussiaScriptGetValue(ii4[2])
+      ii5 = RussiaScriptGetValue(ii4[0])
+      ii6 = RussiaScriptGetValue(ii4[1])
       return (ii5 / ii6)
     }
     if (ii3 == '/') {
-      ii5 = RussiaScriptGetValue(ii4[1])
-      ii6 = RussiaScriptGetValue(ii4[2])
+      ii5 = RussiaScriptGetValue(ii4[0])
+      ii6 = RussiaScriptGetValue(ii4[1])
       return (ii5 / ii6)
     }
     if (ii3 == '%') {
-      ii5 = RussiaScriptGetValue(ii4[1])
-      ii6 = RussiaScriptGetValue(ii4[2])
+      ii5 = RussiaScriptGetValue(ii4[0])
+      ii6 = RussiaScriptGetValue(ii4[1])
       return (ii5 % ii6)
     }
     if (ii3 == '^') {
-      ii5 = RussiaScriptGetValue(ii4[1])
-      ii6 = RussiaScriptGetValue(ii4[2])
+      ii5 = RussiaScriptGetValue(ii4[0])
+      ii6 = RussiaScriptGetValue(ii4[1])
       return (ii5 ** ii6)
     }
     if (ii3 == '**') {
-      ii5 = RussiaScriptGetValue(ii4[1])
-      ii6 = RussiaScriptGetValue(ii4[2])
+      ii5 = RussiaScriptGetValue(ii4[0])
+      ii6 = RussiaScriptGetValue(ii4[1])
       return (ii5 ** ii6)
     }
     if (ii3 == '×') {
-      ii5 = RussiaScriptGetValue(ii4[1])
-      ii6 = RussiaScriptGetValue(ii4[2])
+      ii5 = RussiaScriptGetValue(ii4[0])
+      ii6 = RussiaScriptGetValue(ii4[1])
       return (ii5 * ii6)
     }
     if (ii3 == 'abs') {
@@ -378,13 +383,13 @@ function RussiaScriptGetValue(v) {
       return Math.ceil(RussiaScriptGetValue(ii4))
     }
     if (ii3 == 'рандом') {
-      ii5 = RussiaScriptGetValue(ii4[1])
-      ii6 = RussiaScriptGetValue(ii4[2])
+      ii5 = RussiaScriptGetValue(ii4[0])
+      ii6 = RussiaScriptGetValue(ii4[1])
       return Math.random(ii5, ii6)
     }
     if (ii3 == 'pow') {
-      ii5 = RussiaScriptGetValue(ii4[1])
-      ii6 = RussiaScriptGetValue(ii4[2])
+      ii5 = RussiaScriptGetValue(ii4[0])
+      ii6 = RussiaScriptGetValue(ii4[1])
       return Math.pow(ii5, ii6)
     }
     if (ii3 == 'квадратный корень') {
@@ -410,29 +415,29 @@ function RussiaScriptGetValue(v) {
     }
   }
   if (ii == 'обьеденить2') {
-    ii3 = RussiaScriptGetValue(ii2[1])
-    ii4 = RussiaScriptGetValue(ii2[2])
+    ii3 = RussiaScriptGetValue(ii2[0])
+    ii4 = RussiaScriptGetValue(ii2[1])
     return (`${ii3}${ii4}`)
   }
   if (ii == 'обьеденить3') {
-    ii3 = RussiaScriptGetValue(ii2[1])
-    ii4 = RussiaScriptGetValue(ii2[2])
-    ii5 = RussiaScriptGetValue(ii2[3])
+    ii3 = RussiaScriptGetValue(ii2[0])
+    ii4 = RussiaScriptGetValue(ii2[1])
+    ii5 = RussiaScriptGetValue(ii2[2])
     return (`${ii3}${ii4}${ii5}`)
   }
   if (ii == 'обьеденить4') {
-    ii3 = RussiaScriptGetValue(ii2[1])
-    ii4 = RussiaScriptGetValue(ii2[2])
-    ii5 = RussiaScriptGetValue(ii2[3])
-    ii6 = RussiaScriptGetValue(ii2[4])
+    ii3 = RussiaScriptGetValue(ii2[0])
+    ii4 = RussiaScriptGetValue(ii2[1])
+    ii5 = RussiaScriptGetValue(ii2[2])
+    ii6 = RussiaScriptGetValue(ii2[3])
     return (`${ii3}${ii4}${ii5}${ii6}`)
   }
   if (ii == 'обьеденить5') {
-    ii3 = RussiaScriptGetValue(ii2[1])
-    ii4 = RussiaScriptGetValue(ii2[2])
-    ii5 = RussiaScriptGetValue(ii2[3])
-    ii6 = RussiaScriptGetValue(ii2[4])
-    ii7 = RussiaScriptGetValue(ii2[5])
+    ii3 = RussiaScriptGetValue(ii2[0])
+    ii4 = RussiaScriptGetValue(ii2[1])
+    ii5 = RussiaScriptGetValue(ii2[2])
+    ii6 = RussiaScriptGetValue(ii2[3])
+    ii7 = RussiaScriptGetValue(ii2[4])
     return (`${ii3}${ii4}${ii5}${ii6}${ii7}`)
   }
   if (ii == 'json') {
@@ -504,12 +509,12 @@ function RussiaScriptGetValue(v) {
     }
   }
   if (ii == 'обьеденить6') {
-    ii3 = RussiaScriptGetValue(ii2[1])
-    ii4 = RussiaScriptGetValue(ii2[2])
-    ii5 = RussiaScriptGetValue(ii2[3])
-    ii6 = RussiaScriptGetValue(ii2[4])
-    ii7 = RussiaScriptGetValue(ii2[5])
-    ii8 = RussiaScriptGetValue(ii2[6])
+    ii3 = RussiaScriptGetValue(ii2[0])
+    ii4 = RussiaScriptGetValue(ii2[1])
+    ii5 = RussiaScriptGetValue(ii2[2])
+    ii6 = RussiaScriptGetValue(ii2[3])
+    ii7 = RussiaScriptGetValue(ii2[4])
+    ii8 = RussiaScriptGetValue(ii2[5])
     return (`${ii3}${ii4}${ii5}${ii6}${ii7}${ii8}`)
   }
   if (ii == 'пи') {
@@ -519,24 +524,24 @@ function RussiaScriptGetValue(v) {
     return Math.E
   }
   if (ii == 'обьеденить7') {
-    ii3 = RussiaScriptGetValue(ii2[1])
-    ii4 = RussiaScriptGetValue(ii2[2])
-    ii5 = RussiaScriptGetValue(ii2[3])
-    ii6 = RussiaScriptGetValue(ii2[4])
-    ii7 = RussiaScriptGetValue(ii2[5])
-    ii8 = RussiaScriptGetValue(ii2[6])
-    ii9 = RussiaScriptGetValue(ii2[7])
+    ii3 = RussiaScriptGetValue(ii2[0])
+    ii4 = RussiaScriptGetValue(ii2[1])
+    ii5 = RussiaScriptGetValue(ii2[2])
+    ii6 = RussiaScriptGetValue(ii2[3])
+    ii7 = RussiaScriptGetValue(ii2[4])
+    ii8 = RussiaScriptGetValue(ii2[5])
+    ii9 = RussiaScriptGetValue(ii2[6])
     return (`${ii3}${ii4}${ii5}${ii6}${ii7}${ii8}${ii9}`)
   }
   if (ii == 'обьеденить8') {
-    ii3 = RussiaScriptGetValue(ii2[1])
-    ii4 = RussiaScriptGetValue(ii2[2])
-    ii5 = RussiaScriptGetValue(ii2[3])
-    ii6 = RussiaScriptGetValue(ii2[4])
-    ii7 = RussiaScriptGetValue(ii2[5])
-    ii8 = RussiaScriptGetValue(ii2[6])
-    ii9 = RussiaScriptGetValue(ii2[7])
-    ii10 = RussiaScriptGetValue(ii2[8])
+    ii3 = RussiaScriptGetValue(ii2[0])
+    ii4 = RussiaScriptGetValue(ii2[1])
+    ii5 = RussiaScriptGetValue(ii2[2])
+    ii6 = RussiaScriptGetValue(ii2[3])
+    ii7 = RussiaScriptGetValue(ii2[4])
+    ii8 = RussiaScriptGetValue(ii2[5])
+    ii9 = RussiaScriptGetValue(ii2[6])
+    ii10 = RussiaScriptGetValue(ii2[7])
     return (`${ii3}${ii4}${ii5}${ii6}${ii7}${ii8}${ii9}${ii10}`)
   }
   if (ii == 'getElement') {
@@ -552,22 +557,22 @@ function RussiaScriptGetValue(v) {
     return RussiaScriptTerminal(RussiaScriptGetValue(ii2.com), RussiaScriptGetValue(ii2.par))
   }
   if (ii == 'и') {
-    return (RussiaScriptGetValue(ii2[1]) && RussiaScriptGetValue(ii2[2]))
+    return (RussiaScriptGetValue(ii2[0]) && RussiaScriptGetValue(ii2[1]))
   }
   if (ii == 'или') {
-    return (RussiaScriptGetValue(ii2[1]) || RussiaScriptGetValue(ii2[2]))
+    return (RussiaScriptGetValue(ii2[0]) || RussiaScriptGetValue(ii2[1]))
   }
   if (ii == '=' || ii == '==' || ii == '===') {
-    return (RussiaScriptGetValue(ii2[1]) == RussiaScriptGetValue(ii2[2]))
+    return (RussiaScriptGetValue(ii2[0]) == RussiaScriptGetValue(ii2[1]))
   }
   if (ii == '<') {
-    return (RussiaScriptGetValue(ii2[1]) < RussiaScriptGetValue(ii2[2]))
+    return (RussiaScriptGetValue(ii2[0]) < RussiaScriptGetValue(ii2[1]))
   }
   if (ii == '>') {
-    return (RussiaScriptGetValue(ii2[1]) > RussiaScriptGetValue(ii2[2]))
+    return (RussiaScriptGetValue(ii2[0]) > RussiaScriptGetValue(ii2[1]))
   }
   if (ii == 'не') {
-    return (RussiaScriptGetValue(ii2[1]) != (true))
+    return (RussiaScriptGetValue(ii2[0]) != (true))
   }
   if (ii == 'true') {
     return (true)
@@ -604,13 +609,13 @@ function RussiaScriptGetValue(v) {
     return searchParams.get(RussiaScriptGetValue(ii2))
   }
   if (ii == '≠' || ii == '!=') {
-    return (RussiaScriptGetValue(ii2[1]) != RussiaScriptGetValue(ii2[2]))
+    return (RussiaScriptGetValue(ii2[0]) != RussiaScriptGetValue(ii2[1]))
   }
   if (ii == '<=' || ii == '≤') {
-    return (RussiaScriptGetValue(ii2[1]) <= RussiaScriptGetValue(ii2[2]))
+    return (RussiaScriptGetValue(ii2[0]) <= RussiaScriptGetValue(ii2[1]))
   }
   if (ii == '>=' || ii == '≥') {
-    return (RussiaScriptGetValue(ii2[1]) >= RussiaScriptGetValue(ii2[2]))
+    return (RussiaScriptGetValue(ii2[0]) >= RussiaScriptGetValue(ii2[1]))
   }
   if (ii == 'base64') {
     if (ii2.type === 'encode') {
@@ -671,7 +676,7 @@ function SessionRussiaScript() {
   SessionRussiaScript.["User-agent"] = UserAgent.["user-agent"]
 }
 function runRussiaScript(code) {
-  RScodeRunner = {}
+  let RScodeRunner = {}
   LibsRussiaScript = code.libs
   codeRussiaScript = code.code
   SessionRussiaScript()
@@ -682,10 +687,10 @@ function runRussiaScript(code) {
     Peremens.term = RussiaScriptTerminal(termRussiaScirpt.com, termRussiaScript.par)
   }
   i2 = 'теперь нет смысла'
-  for (i = 0; i < codeRussiaScript.length; i++) {
-    i3 = codeRussiaScript[i]
-    i4 = i3.command
-    i5 = i3.params
+  for (let i = 0; i < codeRussiaScript.length; i++) {
+    let i3 = codeRussiaScript[i]
+    let i4 = i3.command
+    let i5 = i3.params
     if (i4 == 'очистить вывод') {
       RussiaScriptOutput = []
     }
