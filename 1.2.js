@@ -290,11 +290,14 @@ function publicRS(args, n) {
   }
 }
 function RussiaScriptGetValue(v) {
+  if (v === 'err') {
+    return {
+      "if": Peremens.err,
+      "mess": Peremens.errText
+    }
+  }
   if (typeof v === 'number' || typeof v === 'string' || typeof v === 'boolean') {
     return v;
-  }
-  if (v === 'err') {
-    return Peremens.err
   }
   ii = v.type
   ii2 = v.value
@@ -832,6 +835,14 @@ function runRussiaScript(code) {
     }
     if (i4 === 'публик RS1-2$1') {
       publicRS(i5, 1)
+    }
+    if(i4 === 'попытка') {
+      try {
+        runRussiaScript(`\{"libs":"","terminal":"","code":"${RussiaScriptGetValue(i5.codes[RScodeRunner.i]["код"])}"\}`)
+      } catch (err) {
+        Peremens.err = true; Peremens.errText = err.message
+        runRussiaScript(`\{"libs":"","terminal":"","code":"${RussiaScriptGetValue(i5.codes[RScodeRunner.i]["ошибка"])}"\}`)
+      }
     }
   }
 }
