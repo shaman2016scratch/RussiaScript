@@ -749,10 +749,10 @@ function runRussiaScript(code) {
       }
     }
     if (i4 == 'js-функция') {
-      RussiaScriptUser.func[RussiaScriptGetValue(i5.name)] = `function(args) \{ ${RussiaScriptGetValue(i5.code)} \}`
+      RussiaScriptUser.func[RussiaScriptGetValue(i5.name)] = new Function(i5.code)
     }
     if (i4 == 'rs-функция') {
-      RussiaScriptUser.func[RussiaScriptGetValue(i5.name)] = `function(args) \{ runRussiaScript${RussiaScriptGetValue(i5.code)} \}`
+      RussiaScriptUser.func[RussiaScriptGetValue(i5.name)] = new Function(`runRussiaScript(${i5.code})`)
     }
     if (i4 == 'пользователь' || i4 == 'user') {
       if (i5.type == 'функция') {
@@ -843,6 +843,12 @@ function runRussiaScript(code) {
         Peremens.err = true; Peremens.errText = err.message
         runRussiaScript(`\{"libs":"","terminal":"","code":"${RussiaScriptGetValue(i5.codes[RScodeRunner.i]["ошибка"])}"\}`)
       }
+    }
+    if (i4 === "async") {
+      RussiaScriptUser.func[RussiaScriptGetValue(i5.name)] = new Function(`return async function() { runRussiaScript(${RussiaScriptGetValue(i5.code)}) }`)
+    }
+    if (i4 === "await") {
+      eval(`runRussiaScript(${i5})`)
     }
   }
 }
