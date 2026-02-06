@@ -707,8 +707,7 @@ function runRussiaScript(code) {
     }
     if (i4 == 'вывести') {
       RussiaScriptOutput.push(RussiaScriptGetValue(i5))
-    }
-    if (i4 == 'dom') {
+    } else if (i4 == 'dom') {
       RsDomData = {
         "Operations": [
           "getElement",
@@ -719,63 +718,44 @@ function runRussiaScript(code) {
       }
       if (RussiaScriptGetValue(i5["метод"]) == "innerHTML") {
         document.getElementById(RussiaScriptGetValue(i5["элемент"])).innerHTML = RussiaScriptGetValue(i5["значение"]);
-      }
-      if (RussiaScriptGetValue(i5["метод"]) == "TextContent") {
+      } else if (RussiaScriptGetValue(i5["метод"]) == "TextContent") {
         document.getElementById(RussiaScriptGetValue(i5["элемент"])).textContent = RussiaScriptGetValue(i5["значение"]);
       }
-    }
-    if (i4 == 'задать переменной значение') {
+    } else if (i4 == 'задать переменной значение') {
       Peremens[RussiaScriptGetValue(i5.per)] = RussiaScriptGetValue(i5.value)
-    }
-    if (i4 == 'импортировать расширение' || i4 == 'импротировать библиотеку') {
+    } else if (i4 == 'импортировать расширение' || i4 == 'импротировать библиотеку') {
       console.error(`RussiaScript error (line ${i}): command 'import' outdated, use the terminal RussiaScript|Команда '${i4}' устарела, используйте терминал + команду lib (lib, ext, либ)`)
-    }
-    if (i4 == 'js-консоль') {
+    } else if (i4 == 'js-консоль') {
       if (i5['метод'] == 'лог') {
         console.log(RussiaScriptGetValue(i5['значение']))
-      }
-      if (i5['метод'] == 'предупреждение') {
+      } else if (i5['метод'] == 'предупреждение') {
         console.warn(RussiaScriptGetValue(i5['значение']))
-      }
-      if (i5['метод'] == 'ошибка') {
+      } else if (i5['метод'] == 'ошибка') {
         console.error(RussiaScriptGetValue(i5['значение']))
       }
-    }
-    if (i4 == 'если') {
+    } else if (i4 == 'если') {
       if (RussiaScriptGetValue(i5.bol)) {
         runRussiaScript(`\{"libs":"","terminal":"","code":"${RussiaScriptGetValue(i5["то"])}"\}`)
       } else {
         runRussiaScript(`\{"libs":"","terminal":"","code":"${RussiaScriptGetValue(i5["иначе"])}"\}`)
       }
-    }
-    if (i4 == 'js-функция') {
+    } else if (i4 == 'js-функция') {
       RussiaScriptUser.func[RussiaScriptGetValue(i5.name)] = new Function(i5.code)
-    }
-    if (i4 == 'rs-функция') {
+    } else if (i4 == 'rs-функция') {
       RussiaScriptUser.func[RussiaScriptGetValue(i5.name)] = new Function(`runRussiaScript(${i5.code})`)
-    }
-    if (i4 == 'пользователь' || i4 == 'user') {
-      if (i5.type == 'функция') {
-        RussiaScriptUser.func[RussiaScriptGetValue(i5.func)]
-      }
-    }
-    if (ii == 'lib' || ii == 'ext' || ii == 'либ') {
+    } else if (ii == 'lib' || ii == 'ext' || ii == 'либ') {
       RussiaScriptUser.libs[RussiaScriptUser.libsInfo[RussiaScriptGetValue(ii2.name)].id].reporters[RussiaScriptGetValue(ii2.func)]
-    }
-    if (i4 == 'пока') {
+    } else if (i4 == 'пока') {
       while (RussiaScriptGetValue(i5.bol)) {
         runRussiaScript(`\{"libs":"","terminal":"","code":"${RussiaScriptGetValue(i5.code)}"\}`)
       }
-    }
-    if (i4 == 'alert') {
+    } else if (i4 == 'alert') {
       alert(RussiaScriptGetValue(i5))
-    }
-    if (i4 == 'чат-бот') {
+    } else if (i4 == 'чат-бот') {
       if (RussiaScriptGetValue(i5.metod) == 'Задать ответ') {
         RussiaScriptUser.sysModules['Chat Bot'].otvet[RussiaScriptGetValue(i5['запрос'])] = RussiaScriptGetValue(i5['ответ'])
       }
-    }
-    if (i4 == 'rs-js-консоль') {
+    } else if (i4 == 'rs-js-консоль') {
       if (i5['метод'] == 'лог') {
         RsJsConsole('log', RussiaScriptGetValue(i5['значение']))
       }
@@ -788,31 +768,25 @@ function runRussiaScript(code) {
       if (i5['метод'] == 'запрос') {
         RsJsConsole('input', RussiaScriptGetValue(i5['значение']))
       }
-    }
-    if (i4 === 'повторять раз') {
+    } else if (i4 === 'повторять раз') {
       for (RScodeRunner.i = 0; RScodeRunner.i < RussiaScriptGetValue(i5['раз']); RScodeRunner.i++) {
         runRussiaScript(`\{"libs":"","terminal":"","code":"${RussiaScriptGetValue(i5["код"])}"\}`)
       }
-    }
-    if (i4 == 'return') {
+    } else if (i4 == 'return') {
       // для пользовательских функций
       return RussiaScriptGetValue(i5)
-    }
-    if (i4 == 'ждать') {
+    } else if (i4 == 'ждать') {
       await new Promise(resolve => setTimeout(resolve, RussiaScriptGetValue(i5['миллисекунды'])))
-    }
-    if (i4 === 'eval') {
+    } else if (i4 === 'eval') {
       runRussiaScript(RussiaScriptGetValue(i5))
-    }
-    if (i4 === 'если иначе ошибка') {
+    } else if (i4 === 'если иначе ошибка') {
       if (RussiaScriptGetValue(i5.bol)) {
         runRussiaScript(RussiaScriptGetValue(i5.code))
       } else {
         RsJsConsole('error', 'error for script "if else error"')
         Peremens.err = true
       }
-    }
-    if (i4 === 'большой если иначе') {
+    } else if (i4 === 'большой если иначе') {
       RScodeRunner.i2 === 'false'
       for (RScodeRunner.i = 0; RScodeRunner.i < i5.codes.length; RScodeRunner.i++) {
         if (RussiaScriptGetValue(i5.codes[RScodeRunner.i].bol) && RScodeRunner.i2 === false) {
@@ -823,8 +797,7 @@ function runRussiaScript(code) {
       if (RScodeRunner.i2 === 'false') {
         runRussiaScript(`\{"libs":"","terminal":"","code":"${RussiaScriptGetValue(i5.else)}"\}`)
       }
-    }
-    if (i4 === 'большой если') {
+    } else if (i4 === 'большой если') {
       RScodeRunner.i2 === 'false'
       for (RScodeRunner.i = 0; RScodeRunner.i < i5.codes.length; RScodeRunner.i++) {
         if (RussiaScriptGetValue(i5.codes[RScodeRunner.i].bol) && RScodeRunner.i2 === false) {
@@ -832,22 +805,18 @@ function runRussiaScript(code) {
           runRussiaScript(`\{"libs":"","terminal":"","code":"${RussiaScriptGetValue(i5.codes[RScodeRunner.i].code)}"\}`)
         }
       }
-    }
-    if (i4 === 'публик RS1-2$1') {
+    } else if (i4 === 'публик RS1-2$1') {
       publicRS(i5, 1)
-    }
-    if(i4 === 'попытка') {
+    } else if(i4 === 'попытка') {
       try {
         runRussiaScript(`\{"libs":"","terminal":"","code":"${RussiaScriptGetValue(i5.codes[RScodeRunner.i]["код"])}"\}`)
       } catch (err) {
         Peremens.err = true; Peremens.errText = err.message
         runRussiaScript(`\{"libs":"","terminal":"","code":"${RussiaScriptGetValue(i5.codes[RScodeRunner.i]["ошибка"])}"\}`)
       }
-    }
-    if (i4 === "async") {
+    } else if (i4 === "async") {
       RussiaScriptUser.func[RussiaScriptGetValue(i5.name)] = new Function(`return async function() { runRussiaScript(${RussiaScriptGetValue(i5.code)}) }`)
-    }
-    if (i4 === "await") {
+    } else if (i4 === "await") {
       eval(`runRussiaScript(${i5})`)
     }
   }
