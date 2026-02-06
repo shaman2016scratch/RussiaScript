@@ -289,7 +289,7 @@ function publicRS(args, n) {
     let publicArgs = args; let publicCode = publicArgs.code; publicCode = publicCode.split("\n");
   }
 }
-function RussiaScriptGetValue(v) {
+async function RussiaScriptGetValue(v) {
   if (v === 'err') {
     return {
       "if": Peremens.err,
@@ -307,11 +307,15 @@ function RussiaScriptGetValue(v) {
   if (ii == 'переменная') {
     return Peremens[RussiaScriptGetValue(ii2)]
   }
-  if (ii == 'http') {
-    return fetch(RussiaScriptGetValue(ii2.url), {  
-      method: `${RussiaScriptGetValue(ii2.metod)}`,  
-      headers: `${ii2.headers}`
-    })
+  if (ii == 'запрос') {
+    if(!ii2.await) {
+      console.error("using await without async")
+    } else {
+      return await fetch(RussiaScriptGetValue(ii2.url), {  
+        method: `${RussiaScriptGetValue(ii2.metod)}`,  
+        headers: `${ii2.headers}`
+      })
+    }
   }
   if (ii == 'Пустой массив') {
     return []
@@ -566,7 +570,7 @@ function RussiaScriptGetValue(v) {
     return (RussiaScriptGetValue(ii2[0]) || RussiaScriptGetValue(ii2[1]))
   }
   if (ii == '=' || ii == '==' || ii == '===') {
-    return (RussiaScriptGetValue(ii2[0]) == RussiaScriptGetValue(ii2[1]))
+    return (RussiaScriptGetValue(ii2[0]) === RussiaScriptGetValue(ii2[1]))
   }
   if (ii == '<') {
     return (RussiaScriptGetValue(ii2[0]) < RussiaScriptGetValue(ii2[1]))
@@ -577,10 +581,10 @@ function RussiaScriptGetValue(v) {
   if (ii == 'не') {
     return (RussiaScriptGetValue(ii2[0]) != (true))
   }
-  if (ii == 'true') {
+  if (ii == 'верно') {
     return (true)
   }
-  if (ii == 'false') {
+  if (ii == 'неверно') {
     return (false)
   }
   if (ii == 'пользователь' || ii == 'user') {
@@ -662,6 +666,33 @@ function RussiaScriptGetValue(v) {
   if (ii === 'eval') {
     return runRussiaScript(RussiaScriptGetValue(ii2))
   }
+  if (ii == 'обьеденить9') {
+    ii3 = RussiaScriptGetValue(ii2[0])
+    ii4 = RussiaScriptGetValue(ii2[1])
+    ii5 = RussiaScriptGetValue(ii2[2])
+    ii6 = RussiaScriptGetValue(ii2[3])
+    ii7 = RussiaScriptGetValue(ii2[4])
+    ii8 = RussiaScriptGetValue(ii2[5])
+    ii9 = RussiaScriptGetValue(ii2[6])
+    ii10 = RussiaScriptGetValue(ii2[7])
+    ii11 = RussiaScriptGetValue(ii2[8])
+    return (`${ii3}${ii4}${ii5}${ii6}${ii7}${ii8}${ii9}${ii10}${ii11}`)
+  }
+  if (ii === '.json()') {
+    return await ii2.json()
+  }
+  if (ii === '.text()') {
+    return await ii2.text()
+  }
+  if (ii === '.formData()') {
+    return await ii2.formData()
+  }
+  if (ii === ".ArrayBuffer()") {
+    return await ii2.ArrayBuffer()
+  }
+  if (ii === '.blob()') {
+    return await ii2.blob()
+  }
 }
 function SessionRussiaScript() {
   SessionRussiaScript = {
@@ -678,7 +709,7 @@ function SessionRussiaScript() {
       })
   SessionRussiaScript.["User-agent"] = UserAgent.["user-agent"]
 }
-function runRussiaScript(code) {
+async function runRussiaScript(code) {
   let RScodeRunner = {}
   LibsRussiaScript = code.libs
   codeRussiaScript = code.code
@@ -697,25 +728,12 @@ function runRussiaScript(code) {
     if (i4 == 'очистить вывод') {
       RussiaScriptOutput = []
     }
-    if (i4 == 'http запрос') {
-      HttpZapros = [
-        "Post",
-        "Delete",
-        "Get"
-      ]
+    if (i4 == 'запрос') {
       fetch(i5.url, i5.params)
     }
     if (i4 == 'вывести') {
       RussiaScriptOutput.push(RussiaScriptGetValue(i5))
     } else if (i4 == 'dom') {
-      RsDomData = {
-        "Operations": [
-          "getElement",
-          "innerHTML",
-          "TextContent",
-          "GetValue"
-        ]
-      }
       if (RussiaScriptGetValue(i5["метод"]) == "innerHTML") {
         document.getElementById(RussiaScriptGetValue(i5["элемент"])).innerHTML = RussiaScriptGetValue(i5["значение"]);
       } else if (RussiaScriptGetValue(i5["метод"]) == "TextContent") {
@@ -742,7 +760,7 @@ function runRussiaScript(code) {
     } else if (i4 == 'js-функция') {
       RussiaScriptUser.func[RussiaScriptGetValue(i5.name)] = new Function(i5.code)
     } else if (i4 == 'rs-функция') {
-      RussiaScriptUser.func[RussiaScriptGetValue(i5.name)] = new Function(`runRussiaScript(${i5.code})`)
+      RussiaScriptUser.func[RussiaScriptGetValue(i5.name)] = new Function(["param"], `peremens.d = param; runRussiaScript(${i5.code})`)
     } else if (ii == 'lib' || ii == 'ext' || ii == 'либ') {
       RussiaScriptUser.libs[RussiaScriptUser.libsInfo[RussiaScriptGetValue(ii2.name)].id].reporters[RussiaScriptGetValue(ii2.func)]
     } else if (i4 == 'пока') {
@@ -776,7 +794,11 @@ function runRussiaScript(code) {
       // для пользовательских функций
       return RussiaScriptGetValue(i5)
     } else if (i4 == 'ждать') {
-      await new Promise(resolve => setTimeout(resolve, RussiaScriptGetValue(i5['миллисекунды'])))
+      if (!code.async) {
+        console.error("using await without async")
+      } else {
+        await new Promise(resolve => setTimeout(resolve, RussiaScriptGetValue(i5['миллисекунды'])))
+      }
     } else if (i4 === 'eval') {
       runRussiaScript(RussiaScriptGetValue(i5))
     } else if (i4 === 'если иначе ошибка') {
@@ -815,9 +837,19 @@ function runRussiaScript(code) {
         runRussiaScript(`\{"libs":"","terminal":"","code":"${RussiaScriptGetValue(i5.codes[RScodeRunner.i]["ошибка"])}"\}`)
       }
     } else if (i4 === "async") {
-      RussiaScriptUser.func[RussiaScriptGetValue(i5.name)] = new Function(`return async function() { runRussiaScript(${RussiaScriptGetValue(i5.code)}) }`)
+      RussiaScriptUser.func[RussiaScriptGetValue(i5.name)] = new Function(`return async function(param) { Peremens.d = param; runRussiaScript(${RussiaScriptGetValue(i5.code)}) }`)
     } else if (i4 === "await") {
-      eval(`runRussiaScript(${i5})`)
+      if (!code.async) {
+        console.error("using await without async")
+      } else {
+        eval(`runRussiaScript(${i5})`)
+      }
+    } else {
+      if (!RussiaScriptUser.func[i4]) {
+        // Игнорим пока
+      } else {
+        RussiaScriptUser.func[i4](i5)
+      }
     }
   }
 }
