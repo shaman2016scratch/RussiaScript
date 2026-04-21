@@ -1,5 +1,4 @@
-// RussiaScript code
-// код RussiaScript
+// RussiaScript code/код RussiaScript
 let RsProjectObject = {
   "src": {},
   "output": [],
@@ -34,7 +33,7 @@ let sys = {
 }
 let RussiaScriptUser = {
   "func": {
-    "return": "function(args) { return (args) }",
+    "return": function(args) { return (args) },
   },
   "libs": {},
   "libsInfo": {},
@@ -760,7 +759,7 @@ async function runRussiaScript(code) {
     } else if (i4 == 'js-функция') {
       RussiaScriptUser.func[RussiaScriptGetValue(i5.name)] = new Function(i5.code)
     } else if (i4 == 'rs-функция') {
-      RussiaScriptUser.func[RussiaScriptGetValue(i5.name)] = new Function(["param"], `peremens.d = param; runRussiaScript(${i5.code})`)
+      RussiaScriptUser.func[RussiaScriptGetValue(i5.name)] = new Function(["param"], `peremens.args = param; runRussiaScript(${i5.code}); delete peremens.args`)
     } else if (ii == 'lib' || ii == 'ext' || ii == 'либ') {
       RussiaScriptUser.libs[RussiaScriptUser.libsInfo[RussiaScriptGetValue(ii2.name)].id].reporters[RussiaScriptGetValue(ii2.func)]
     } else if (i4 == 'пока') {
@@ -895,4 +894,7 @@ function MakeError(error, params) {
   } else {
     console.error(`Error RussiaScript  MakeError(): Error not found`)
   }
+}
+async function loadingData() {
+  let getMe = await fetch('https://api-shaman2016.vercel.app/getMe'); getMe = await getMe.json(); getMe = getMe.result; sys.os = getMe.headers['sec-ch-ua-platform']; syd.lang = getMe.headers['x-vercel-ip-country']
 }
